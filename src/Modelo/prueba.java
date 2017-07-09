@@ -5,15 +5,14 @@
  */
 package Modelo;
 
-import java.util.Date;
+import java.sql.SQLException;
 
 /**
  *
  * @author Sergio
  */
 public class prueba {
-    public static void main(String[] args){
-        Date fecha = new Date();
-        System.out.println("Fecha Actual: "+fecha.toString());
+    public static void main(String[] args) throws ClassNotFoundException, SQLException{
+        AdminBaseDatos coneccion = new AdminBaseDatos();
     }
 }
