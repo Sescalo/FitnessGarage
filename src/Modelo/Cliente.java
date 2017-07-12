@@ -23,9 +23,12 @@ public class Cliente {
     private String fechaIngreso; //La fecha tiene el siguiente formato: DD/MM/AA
     private String fechaPago;
     private String fechaSigPago;
+    private String morosidades;
     private String comentarios;
+    private boolean tratoEspecial;
+    private boolean eliminado;
 
-    public Cliente(int idCliente, int diasVencimiento, String nombreCliente, String primerApellido, String segundoApellido, String cedula, String telefono, String direccion, String email, String fechaIngreso, String fechaPago, String fechaSigPago, String comentarios) {
+    public Cliente(int idCliente, int diasVencimiento, String nombreCliente, String primerApellido, String segundoApellido, String cedula, String telefono, String direccion, String email, String fechaIngreso, String fechaPago, String fechaSigPago, String morosidades, String comentarios, boolean tratoEspecial, boolean eliminado) {
         this.idCliente = idCliente;
         this.diasVencimiento = diasVencimiento;
         this.nombreCliente = nombreCliente;
@@ -38,7 +41,10 @@ public class Cliente {
         this.fechaIngreso = fechaIngreso;
         this.fechaPago = fechaPago;
         this.fechaSigPago = fechaSigPago;
+        this.morosidades = morosidades;
         this.comentarios = comentarios;
+        this.tratoEspecial = tratoEspecial;
+        this.eliminado = eliminado;
     }
 
     public int getIdCliente() {
@@ -143,6 +149,30 @@ public class Cliente {
 
     public void setComentarios(String comentarios) {
         this.comentarios = comentarios;
+    }
+
+    public String getMorosidades() {
+        return morosidades;
+    }
+
+    public void setMorosidades(String morosidades) {
+        this.morosidades = morosidades;
+    }
+
+    public boolean isTratoEspecial() {
+        return tratoEspecial;
+    }
+
+    public void setTratoEspecial(boolean tratoEspecial) {
+        this.tratoEspecial = tratoEspecial;
+    }
+
+    public boolean isEliminado() {
+        return eliminado;
+    }
+
+    public void setEliminado(boolean eliminado) {
+        this.eliminado = eliminado;
     }
 
     @Override

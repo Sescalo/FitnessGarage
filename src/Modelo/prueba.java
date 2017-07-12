@@ -6,6 +6,8 @@
 package Modelo;
 
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -14,5 +16,7 @@ import java.sql.SQLException;
 public class prueba {
     public static void main(String[] args) throws ClassNotFoundException, SQLException{
         AdminBaseDatos coneccion = new AdminBaseDatos();
+        Validaciones validaciones = new Validaciones();
+        System.out.println(validaciones.generarFechaActual());
     }
 }
