@@ -5,34 +5,56 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema FitnessGarage
+-- Schema mydb
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `FitnessGarage` ;
+-- -----------------------------------------------------
+-- Schema fitnessgarage
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `fitnessgarage` ;
 
 -- -----------------------------------------------------
--- Schema FitnessGarage
+-- Schema fitnessgarage
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `FitnessGarage` DEFAULT CHARACTER SET utf8 ;
-USE `FitnessGarage` ;
+CREATE SCHEMA IF NOT EXISTS `fitnessgarage` DEFAULT CHARACTER SET utf8 ;
+USE `fitnessgarage` ;
 
 -- -----------------------------------------------------
--- Table `FitnessGarage`.`Cliente`
+-- Table `fitnessgarage`.`cliente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `FitnessGarage`.`Cliente` (
-  `idCliente` INT NOT NULL AUTO_INCREMENT,
-  `diasVencimiento` INT NOT NULL,
-  `nombreCliente` VARCHAR(45) NOT NULL,
-  `primerApellido` VARCHAR(45) NOT NULL,
-  `segundoApellido` VARCHAR(45) NOT NULL,
-  `cedula` VARCHAR(45) NOT NULL,
-  `telefono` VARCHAR(45) NOT NULL,
-  `direccion` VARCHAR(150) NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
-  `fechaIngreso` VARCHAR(45) NOT NULL,
-  `fechaPago` VARCHAR(45) NOT NULL,
-  `fechaSigPago` VARCHAR(45) NOT NULL,
-  `comentarios` VARCHAR(300) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fitnessgarage`.`cliente` (
+  `idCliente` INT(11) NOT NULL AUTO_INCREMENT,
+  `diasVencimiento` INT(11) NULL,
+  `nombreCliente` VARCHAR(45) NULL,
+  `primerApellido` VARCHAR(45) NULL,
+  `segundoApellido` VARCHAR(45) NULL,
+  `cedula` VARCHAR(45) NULL,
+  `telefono` VARCHAR(45) NULL,
+  `direccion` VARCHAR(150) NULL,
+  `email` VARCHAR(45) NULL,
+  `fechaIngreso` VARCHAR(45) NULL,
+  `fechaPago` VARCHAR(45) NULL,
+  `fechaSigPago` VARCHAR(45) NULL,
+  `morosidades` VARCHAR(200) NULL,
+  `comentarios` VARCHAR(300) NULL,
+  `tratoEspecial` TINYINT NULL,
+  `eliminado` TINYINT NULL DEFAULT 0,
   PRIMARY KEY (`idCliente`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `fitnessgarage`.`Usuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `fitnessgarage`.`Usuario` (
+  `idUsuario` INT NOT NULL AUTO_INCREMENT,
+  `nombreUsuario` VARCHAR(45) NULL,
+  `contrasena` VARCHAR(45) NOT NULL,
+  `nombre` VARCHAR(45) NULL,
+  `primerApellido` VARCHAR(45) NULL,
+  `segundoApellido` VARCHAR(45) NULL,
+  `eliminado` TINYINT NULL DEFAULT 0,
+  PRIMARY KEY (`idUsuario`))
 ENGINE = InnoDB;
 
 
