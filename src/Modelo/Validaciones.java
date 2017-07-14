@@ -73,14 +73,14 @@ public class Validaciones {
         return dia+"/"+mes+"/"+ano;
     }
     
-    public boolean calcularDiaAntes(Cliente cliente){
+    public boolean calcularDiaAntes(String fechaPago){
         
         String fechaActual = generarFechaActual();
         int dia = Integer.valueOf(fechaActual.substring(0, 2));
         String mes = fechaActual.substring(3, 5);
         String ano = fechaActual.substring(6, 10);
         
-        String fechaPago = cliente.getFechaPago();
+        //String fechaPago = cliente.getFechaPago();
         int diaPago = Integer.valueOf(fechaPago.substring(0, 2));
         String mesPago = fechaPago.substring(3, 5);
         String anoPago = fechaPago.substring(6, 10);
