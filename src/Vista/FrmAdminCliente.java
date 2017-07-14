@@ -34,7 +34,7 @@ public class FrmAdminCliente extends javax.swing.JFrame {
 
         pnlAdminCliente1 = new Vista.PnlAdminCliente();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(735, 700));
         setResizable(false);
 
