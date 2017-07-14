@@ -46,6 +46,10 @@ public class Cliente {
         this.tratoEspecial = tratoEspecial;
         this.eliminado = eliminado;
     }
+    
+    public Cliente(){
+        
+    }
 
     public int getIdCliente() {
         return idCliente;

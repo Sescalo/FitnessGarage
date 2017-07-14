@@ -17,6 +17,6 @@ public class prueba {
     public static void main(String[] args) throws ClassNotFoundException, SQLException{
         AdminBaseDatos coneccion = new AdminBaseDatos();
         Validaciones validaciones = new Validaciones();
-        System.out.println(validaciones.generarFechaActual());
+        System.out.println(validaciones.validarNombres("Sergio", "Campos", "López"));
     }
 }
