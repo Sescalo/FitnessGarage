@@ -6,6 +6,9 @@
 package Vista;
 
 import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 
 /**
  *

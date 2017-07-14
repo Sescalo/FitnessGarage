@@ -14,14 +14,12 @@ import javax.swing.JScrollPane;
  */
 public class FrmAdminCliente extends javax.swing.JFrame {
 
-    private PnlAdminCliente pnlAdCliente;
     /** Creates new form FrmAdminCliente */
     public FrmAdminCliente() {
         initComponents();
-        this.pnlAdCliente= new PnlAdminCliente();
-        JScrollPane jsp = new JScrollPane(pnlAdCliente);
-        this.add(jsp);
-        
+        JScrollPane scrollPane = new JScrollPane(this.pnlAdminCliente1);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(10);
+        this.setContentPane(scrollPane);
     }
 
 
@@ -37,6 +35,8 @@ public class FrmAdminCliente extends javax.swing.JFrame {
         pnlAdminCliente1 = new Vista.PnlAdminCliente();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(735, 700));
+        setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
