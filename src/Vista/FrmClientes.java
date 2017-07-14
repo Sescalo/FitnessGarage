@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Michelt
@@ -16,6 +18,10 @@ public class FrmClientes extends javax.swing.JFrame {
      */
     public FrmClientes() {
         initComponents();
+    }
+    
+    public void escuchar(ActionListener manejador){
+         this.btnSalir.addActionListener(manejador);
     }
 
     /**
@@ -29,7 +35,7 @@ public class FrmClientes extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
-        pnlTabla1 = new Vista.PnlTabla();
+        tblCliente = new Vista.PnlTabla();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -51,7 +57,7 @@ public class FrmClientes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlTabla1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(tblCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
@@ -60,7 +66,7 @@ public class FrmClientes extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlTabla1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tblCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -77,6 +83,6 @@ public class FrmClientes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
-    private Vista.PnlTabla pnlTabla1;
+    private Vista.PnlTabla tblCliente;
     // End of variables declaration//GEN-END:variables
 }

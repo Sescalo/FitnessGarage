@@ -13,16 +13,25 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Iniciar Sesi&#xf3;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiIniciarSesionActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiCerrarSesion">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cerrar Sesi&#xf3;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiCerrarSesionActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiSalir">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Salir"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiSalirActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -35,6 +44,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Tabla de Clientes"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiTblClientesActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiAdminUsuarios">
               <Properties>
@@ -48,6 +60,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Administrador Clientes"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiAdminClientesActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

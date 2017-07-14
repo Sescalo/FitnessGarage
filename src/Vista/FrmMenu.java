@@ -12,12 +12,25 @@ package Vista;
  */
 public class FrmMenu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmMenu
-     */
+    private FrmSesion frmSesion;
+    private FrmAdminCliente frmAdminCliente;
+    private FrmAdminUsuario frmAdminUsuario;
+    private FrmClientes frmCliente;
+    
     public FrmMenu() {
         initComponents();
         
+    }
+    
+    public void deshabilitarComponentes() {
+        jmMantenimiento.setEnabled(false);
+        jmiCerrarSesion.setEnabled(false);
+    }
+    
+    public void habilitarMantenimiento() {        
+        jmMantenimiento.setEnabled(true);
+        jmiIniciarSesion.setEnabled(false);
+        jmiCerrarSesion.setEnabled(true);
     }
 
     /**
@@ -49,12 +62,27 @@ public class FrmMenu extends javax.swing.JFrame {
         jmSesion.setText("Sesión");
 
         jmiIniciarSesion.setText("Iniciar Sesión");
+        jmiIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiIniciarSesionActionPerformed(evt);
+            }
+        });
         jmSesion.add(jmiIniciarSesion);
 
         jmiCerrarSesion.setText("Cerrar Sesión");
+        jmiCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCerrarSesionActionPerformed(evt);
+            }
+        });
         jmSesion.add(jmiCerrarSesion);
 
         jmiSalir.setText("Salir");
+        jmiSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSalirActionPerformed(evt);
+            }
+        });
         jmSesion.add(jmiSalir);
 
         jMenuBar1.add(jmSesion);
@@ -62,6 +90,11 @@ public class FrmMenu extends javax.swing.JFrame {
         jmMantenimiento.setText("Mantenimiento");
 
         jmiTblClientes.setText("Tabla de Clientes");
+        jmiTblClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiTblClientesActionPerformed(evt);
+            }
+        });
         jmMantenimiento.add(jmiTblClientes);
 
         jmiAdminUsuarios.setText("Administrador Usuarios");
@@ -73,6 +106,11 @@ public class FrmMenu extends javax.swing.JFrame {
         jmMantenimiento.add(jmiAdminUsuarios);
 
         jmiAdminClientes.setText("Administrador Clientes");
+        jmiAdminClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAdminClientesActionPerformed(evt);
+            }
+        });
         jmMantenimiento.add(jmiAdminClientes);
 
         jMenuBar1.add(jmMantenimiento);
@@ -96,8 +134,30 @@ public class FrmMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmiAdminUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAdminUsuariosActionPerformed
-        // TODO add your handling code here:
+        frmAdminUsuario.setVisible(true);
     }//GEN-LAST:event_jmiAdminUsuariosActionPerformed
+
+    private void jmiAdminClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAdminClientesActionPerformed
+        frmAdminCliente.setVisible(true);
+    }//GEN-LAST:event_jmiAdminClientesActionPerformed
+
+    private void jmiTblClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiTblClientesActionPerformed
+        frmCliente.setVisible(true);
+    }//GEN-LAST:event_jmiTblClientesActionPerformed
+
+    private void jmiIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiIniciarSesionActionPerformed
+         frmSesion.setVisible(true);
+    }//GEN-LAST:event_jmiIniciarSesionActionPerformed
+
+    private void jmiSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jmiSalirActionPerformed
+
+    private void jmiCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCerrarSesionActionPerformed
+       jmMantenimiento.setEnabled(false);
+        jmiIniciarSesion.setEnabled(true);
+        jmiCerrarSesion.setEnabled(false);
+    }//GEN-LAST:event_jmiCerrarSesionActionPerformed
 
     /**
      * @param args the command line arguments
