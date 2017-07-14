@@ -5,6 +5,9 @@
  */
 package Vista;
 
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 /**
  *
  * @author Michelt
@@ -16,6 +19,10 @@ public class FrmClientes extends javax.swing.JFrame {
      */
     public FrmClientes() {
         initComponents();
+        tblClientes.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+//        JScrollPane scrollPane = new JScrollPane(this.tblClientes);
+//        //scrollPane.getVerticalScrollBar().setUnitIncrement(10);
+//        this.setContentPane(scrollPane);
     }
 
     /**
@@ -55,9 +62,10 @@ public class FrmClientes extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tblClientes.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblClientes);
         if (tblClientes.getColumnModel().getColumnCount() > 0) {
-            tblClientes.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tblClientes.getColumnModel().getColumn(0).setPreferredWidth(100);
             tblClientes.getColumnModel().getColumn(1).setPreferredWidth(120);
             tblClientes.getColumnModel().getColumn(2).setPreferredWidth(100);
             tblClientes.getColumnModel().getColumn(3).setPreferredWidth(120);
@@ -70,7 +78,7 @@ public class FrmClientes extends javax.swing.JFrame {
             tblClientes.getColumnModel().getColumn(11).setPreferredWidth(100);
             tblClientes.getColumnModel().getColumn(12).setPreferredWidth(150);
             tblClientes.getColumnModel().getColumn(13).setPreferredWidth(200);
-            tblClientes.getColumnModel().getColumn(14).setPreferredWidth(20);
+            tblClientes.getColumnModel().getColumn(14).setPreferredWidth(100);
         }
 
         btnSalir.setText("Salir");
@@ -81,17 +89,16 @@ public class FrmClientes extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 2573, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(728, 728, 728)
+                        .addGap(690, 690, 690)
                         .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(368, 368, 368)
+                        .addGap(327, 327, 327)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(1790, 1790, 1790))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
