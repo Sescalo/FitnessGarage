@@ -6,6 +6,7 @@
 
 package Vista;
 
+import Controlador.ManejadorAdminCliente;
 import javax.swing.JScrollPane;
 
 /**
@@ -17,10 +18,13 @@ public class FrmAdminCliente extends javax.swing.JFrame {
     /** Creates new form FrmAdminCliente */
     public FrmAdminCliente() {
         initComponents();
+        ManejadorAdminCliente manejador= new ManejadorAdminCliente(this);
+        this.pnlAdminCliente1.escuchar(manejador);
         JScrollPane scrollPane = new JScrollPane(this.pnlAdminCliente1);
         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
         this.setContentPane(scrollPane);
     }
+
 
 
     /** This method is called from within the constructor to

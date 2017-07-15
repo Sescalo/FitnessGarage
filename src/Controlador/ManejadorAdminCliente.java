@@ -5,7 +5,7 @@
  */
 package Controlador;
 
-import Vista.FrmAdminUsuario;
+import Vista.FrmAdminCliente;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,19 +13,18 @@ import java.awt.event.ActionListener;
  *
  * @author Michelt
  */
-public class ManejadorAdminUsuario implements ActionListener{
-    
-    private FrmAdminUsuario frmAdminUsuario;
+public class ManejadorAdminCliente implements ActionListener {
 
-    public ManejadorAdminUsuario(FrmAdminUsuario frmAdminUsuario) {
-        this.frmAdminUsuario = frmAdminUsuario;
+    private FrmAdminCliente frmAdminCliente;
+
+    public ManejadorAdminCliente(FrmAdminCliente frmAdminCliente) {
+        this.frmAdminCliente = frmAdminCliente;
     }
     
-
     @Override
     public void actionPerformed(ActionEvent ae) {
         if(ae.getActionCommand().equalsIgnoreCase("Salir")){
-           frmAdminUsuario.dispose();
+             frmAdminCliente.dispose();
         }
         if(ae.getActionCommand().equalsIgnoreCase("Incluir")){
         
@@ -39,7 +38,6 @@ public class ManejadorAdminUsuario implements ActionListener{
         if(ae.getActionCommand().equalsIgnoreCase("Eliminar")){
         
         }
-        
     }
     
 }

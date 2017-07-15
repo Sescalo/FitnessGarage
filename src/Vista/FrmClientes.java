@@ -5,7 +5,11 @@
  */
 package Vista;
 
+import Modelo.AdminBaseDatos;
+import Modelo.Cliente;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -22,18 +26,35 @@ public class FrmClientes extends javax.swing.JFrame {
      */
     
     private DefaultTableModel modelo;
+    private AdminBaseDatos conexion;
     
-    public FrmClientes() {
+    public FrmClientes(AdminBaseDatos conexion) {
         initComponents();
+        this.conexion=conexion;
+        this.setTablaCliente(conexion.getClientes());
 //        JTableHeader header = tblClientes.getTableHeader();
 //        header.setBackground(Color.BLUE);
         tblClientes.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         this.modelo = (DefaultTableModel) tblClientes.getModel();
+        
         //tblClientes.setDefaultRenderer(Object.class, new MyCellRenderer());
         //modelo.setRowColor(0, Color.RED);
         
     }
-
+    
+    public void escuchar(ActionListener manejador){
+         this.btnSalir.addActionListener(manejador);
+    }
+    
+    public void setTablaCliente(ArrayList<Cliente> clientes){
+       DefaultTableModel modelo = (DefaultTableModel) this.tblClientes.getModel();
+       for(Cliente cliente: clientes){
+            Object[] tmp={cliente.getIdCliente(),cliente.getDiasVencimiento(),cliente.getNombreCliente(),cliente.getPrimerApellido(),cliente.getSegundoApellido(),
+            cliente.getCedula(),cliente.getTelefono(),cliente.getDireccion(),cliente.getEmail(),cliente.getFechaIngreso(),
+            cliente.getFechaPago(),cliente.getFechaSigPago(),cliente.getMorosidades(),cliente.getComentarios(),cliente.isTratoEspecial()};
+            modelo.addRow(tmp);
+       }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -103,14 +124,11 @@ public class FrmClientes extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())))))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,38 +148,6 @@ public class FrmClientes extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmClientes().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;

@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import Controlador.ManejadorSesion;
+import Modelo.AdminBaseDatos;
 import java.awt.event.ActionListener;
 
 /**
@@ -13,11 +15,15 @@ import java.awt.event.ActionListener;
  */
 public class FrmSesion extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmSesion
-     */
-    public FrmSesion() {
+    private AdminBaseDatos conexion;
+    private FrmMenu frmMenu;
+    
+    public FrmSesion(AdminBaseDatos conexion,FrmMenu frmMenu) {
         initComponents();
+        this.conexion= conexion;
+        this.frmMenu= frmMenu;
+        ManejadorSesion manejador= new ManejadorSesion(this);
+        escuchar(manejador);
         
     }
     
@@ -26,12 +32,30 @@ public class FrmSesion extends javax.swing.JFrame {
          this.btnSalir.addActionListener(menejador);
     }
 
-    public String getTxtContraseña() {
-        return txtContraseña.getText();
+    public AdminBaseDatos getConexion() {
+        return conexion;
     }
 
-    public void setTxtContraseña(String txtContraseña) {
-        this.txtContraseña.setText(txtContraseña);
+    public void setConexion(AdminBaseDatos conexion) {
+        this.conexion = conexion;
+    }
+
+    public FrmMenu getFrmMenu() {
+        return frmMenu;
+    }
+
+    public void setFrmMenu(FrmMenu frmMenu) {
+        this.frmMenu = frmMenu;
+    }
+    
+    
+
+    public String getTxtContrasena() {
+        return txtContrasena.getText();
+    }
+
+    public void setTxtContrasena(String txtContrasena) {
+        this.txtContrasena.setText(txtContrasena);
     }
 
     public String getTxtSesionUsuario() {
@@ -59,7 +83,7 @@ public class FrmSesion extends javax.swing.JFrame {
         btnIniciarSesion = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         txtSesionUsuario = new javax.swing.JTextField();
-        txtContraseña = new javax.swing.JTextField();
+        txtContrasena = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -99,7 +123,7 @@ public class FrmSesion extends javax.swing.JFrame {
                         .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtSesionUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                            .addComponent(txtContraseña))))
+                            .addComponent(txtContrasena))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -114,7 +138,7 @@ public class FrmSesion extends javax.swing.JFrame {
                 .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,7 +159,7 @@ public class FrmSesion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField txtContraseña;
+    private javax.swing.JTextField txtContrasena;
     private javax.swing.JTextField txtSesionUsuario;
     // End of variables declaration//GEN-END:variables
 }

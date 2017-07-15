@@ -185,7 +185,7 @@ public class AdminBaseDatos {
         return cliente;
     }
     
-    private boolean existeUsuario(Usuario usuario){
+    public boolean existeUsuario(Usuario usuario){
         boolean existe = false;
         try{
             stmt = conn.createStatement();

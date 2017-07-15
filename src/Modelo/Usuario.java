@@ -32,6 +32,12 @@ public class Usuario {
         this.eliminado = eliminado;
     }
 
+    public Usuario(String nombreUsuario, String contrasena) {
+        this.nombreUsuario = nombreUsuario;
+        this.contrasena = contrasena;
+    }
+    
+
     public int getIdUsuario() {
         return idUsuario;
     }
