@@ -5,6 +5,11 @@
  */
 package Vista;
 
+import Modelo.AdminBaseDatos;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -16,10 +21,15 @@ public class FrmMenu extends javax.swing.JFrame {
     private FrmAdminCliente frmAdminCliente;
     private FrmAdminUsuario frmAdminUsuario;
     private FrmClientes frmCliente;
+    private AdminBaseDatos conexion;
     
-    public FrmMenu() {
+    public FrmMenu() throws ClassNotFoundException, SQLException {
         initComponents();
-        
+        this.conexion = new AdminBaseDatos();
+        this.frmSesion = new FrmSesion(conexion, this);
+        this.frmAdminCliente = new FrmAdminCliente(conexion, this);
+        this.frmAdminUsuario = new FrmAdminUsuario(conexion, this);
+        this.frmCliente = new FrmClientes(conexion, this);
     }
     
     public void deshabilitarComponentes() {
@@ -190,7 +200,13 @@ public class FrmMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmMenu().setVisible(true);
+                try {
+                    new FrmMenu().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(FrmMenu.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(FrmMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

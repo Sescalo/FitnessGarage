@@ -27,17 +27,19 @@ public class FrmClientes extends javax.swing.JFrame {
     
     private DefaultTableModel modelo;
     private AdminBaseDatos conexion;
+    private FrmMenu frmMenu;
     
-    public FrmClientes(AdminBaseDatos conexion) {
+    public FrmClientes(AdminBaseDatos conexion, FrmMenu frmMenu) {
         initComponents();
         this.conexion=conexion;
+        this.frmMenu = frmMenu;
         this.setTablaCliente(conexion.getClientes());
-//        JTableHeader header = tblClientes.getTableHeader();
-//        header.setBackground(Color.BLUE);
         tblClientes.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        JTableHeader header = tblClientes.getTableHeader();
+        header.setBackground(Color.green); //or some other color 
         this.modelo = (DefaultTableModel) tblClientes.getModel();
         
-        //tblClientes.setDefaultRenderer(Object.class, new MyCellRenderer());
+        tblClientes.setDefaultRenderer(Object.class, new MyCellRenderer());
         //modelo.setRowColor(0, Color.RED);
         
     }
@@ -78,7 +80,9 @@ public class FrmClientes extends javax.swing.JFrame {
 
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                { new Integer(1),  new Integer(11), null, null, null, null, null, null, null, null, null, null, null, null, null}
+                { new Integer(1),  new Integer(11), null, null, null, null, null, null, null, null, "12/07/2017", null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, "15/07/2017", null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, "15/07/2017", null, null, null, null}
             },
             new String [] {
                 "ID Clientes", "Días restantes para vencimiento", "Nombre", "Primer Apellido", "Segundo Apellido", "Cedula", "Telefono", "Dirección", "E-mail", "Fecha de Ingreso", "Fecha de Pago", "Fecha del próximo pago", "Morosidades", "Comentarios", "Trato Especial"
@@ -120,15 +124,15 @@ public class FrmClientes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

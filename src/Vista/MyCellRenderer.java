@@ -21,6 +21,7 @@ public class MyCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
             String sval = val.toString();
             Validaciones validaciones = new Validaciones();
             boolean unDia = validaciones.calcularDiaAntes(sval);
+            System.out.println(unDia);
             if (unDia) {
                 cellComponent.setForeground(Color.black);
                 cellComponent.setBackground(Color.red);

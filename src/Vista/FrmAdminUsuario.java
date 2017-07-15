@@ -6,6 +6,7 @@
 package Vista;
 
 import Controlador.ManejadorAdminUsuario;
+import Modelo.AdminBaseDatos;
 import java.awt.event.ActionListener;
 
 /**
@@ -17,8 +18,14 @@ public class FrmAdminUsuario extends javax.swing.JFrame {
     /**
      * Creates new form FrmAdminUsuario
      */
-    public FrmAdminUsuario() {
+    
+    private AdminBaseDatos conexion;
+    private FrmMenu frmMenu;
+    
+    public FrmAdminUsuario(AdminBaseDatos conexion, FrmMenu frmMenu) {
         initComponents();
+        this.conexion = conexion;
+        this.frmMenu = frmMenu;
         ManejadorAdminUsuario manejador= new ManejadorAdminUsuario(this);
         escuchar(manejador);
     }
