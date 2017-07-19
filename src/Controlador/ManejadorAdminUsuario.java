@@ -51,6 +51,10 @@ public class ManejadorAdminUsuario implements ActionListener{
             JOptionPane.showMessageDialog(frmAdminUsuario, "El nombre de usuario ya existe.");
             return false;
         }
+        else if(usuario.getIdUsuario() == 1){
+            JOptionPane.showMessageDialog(frmAdminUsuario, "No puede modificar a este usuario.");
+            return false;
+        }
         else if(!validar.validarNombres(usuario.getNombre(), usuario.getPrimerApellido(), usuario.getSegundoApellido())){
             JOptionPane.showMessageDialog(frmAdminUsuario, "El nombre o apellido es incorrecto.");
             return false;
@@ -80,7 +84,7 @@ public class ManejadorAdminUsuario implements ActionListener{
         if(ae.getActionCommand().equalsIgnoreCase("Modificar")){
             usuario = usuarioVacio();
             if(usuario != null){
-                if(validarDatosUsuario(usuario)){
+                if(validarDatosUsuario(usuario) && usuario.getIdUsuario() != 1){
                     conexion.modificarUsuario(usuario);
                     JOptionPane.showMessageDialog(frmAdminUsuario, "Usuario modificado correctamente.");
                 }
@@ -103,8 +107,11 @@ public class ManejadorAdminUsuario implements ActionListener{
             }
         }
         if(ae.getActionCommand().equalsIgnoreCase("Eliminar")){
-            if(JOptionPane.showConfirmDialog(frmAdminUsuario, "¿Está seguro de eliminar este usuario?") == 0){
+            if(JOptionPane.showConfirmDialog(frmAdminUsuario, "¿Está seguro de eliminar este usuario?") == 0 && frmAdminUsuario.getTxtIdUsuario() != 1){
                 conexion.eliminarUsuario(frmAdminUsuario.getTxtIdUsuario());
+                JOptionPane.showMessageDialog(frmAdminUsuario, "Usuario eliminado correctamente.");
+            } else {
+                JOptionPane.showMessageDialog(frmAdminUsuario, "No puede eliminar este usuario.");
             }
         }
         

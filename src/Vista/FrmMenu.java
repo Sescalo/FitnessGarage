@@ -9,6 +9,7 @@ import Modelo.AdminBaseDatos;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 
 
 /**
@@ -43,6 +44,46 @@ public class FrmMenu extends javax.swing.JFrame {
         jmMantenimiento.setEnabled(true);
         jmiIniciarSesion.setEnabled(false);
         jmiCerrarSesion.setEnabled(true);
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario.getText();
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario.setText(nombreUsuario);
+    }
+
+    public FrmSesion getFrmSesion() {
+        return frmSesion;
+    }
+
+    public void setFrmSesion(FrmSesion frmSesion) {
+        this.frmSesion = frmSesion;
+    }
+
+    public FrmAdminCliente getFrmAdminCliente() {
+        return frmAdminCliente;
+    }
+
+    public void setFrmAdminCliente(FrmAdminCliente frmAdminCliente) {
+        this.frmAdminCliente = frmAdminCliente;
+    }
+
+    public FrmAdminUsuario getFrmAdminUsuario() {
+        return frmAdminUsuario;
+    }
+
+    public void setFrmAdminUsuario(FrmAdminUsuario frmAdminUsuario) {
+        this.frmAdminUsuario = frmAdminUsuario;
+    }
+
+    public FrmClientes getFrmCliente() {
+        return frmCliente;
+    }
+
+    public void setFrmCliente(FrmClientes frmCliente) {
+        this.frmCliente = frmCliente;
     }
 
     /**

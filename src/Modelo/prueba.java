@@ -43,7 +43,7 @@ public class prueba {
 //    }
     public static void main(String[] args) {
         Usuario usuario = new Usuario("perro","er");
-        System.out.println(usuario.encriptarContra("sergio"));
+        System.out.println(usuario.encriptarContra("mitch"));
 //		ScrollableJTable();
 //	}
 //	public static void ScrollableJTable(){

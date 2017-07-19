@@ -37,10 +37,15 @@ public class ManejadorSesion implements ActionListener{
             if(!nombreUsuario.equalsIgnoreCase("") && !contrasena.equalsIgnoreCase("")){
                Usuario usuario= new Usuario(nombreUsuario,contrasena);
                if(conexion.existeUsuario(usuario)){
+                    frmSesion.getFrmMenu().setNombreUsuario(nombreUsuario);
                     frmSesion.getFrmMenu().habilitarMantenimiento();
                     frmSesion.dispose();
                     frmSesion.setTxtSesionUsuario("");
                     frmSesion.setTxtContrasena("");
+                    if(!nombreUsuario.equalsIgnoreCase("scampos")){
+                        frmSesion.getFrmMenu().getFrmAdminUsuario().getBtnEliminar().setEnabled(false);
+                        frmSesion.getFrmMenu().getFrmAdminUsuario().getJTextContra().setVisible(false);
+                    }
                }else {
                      JOptionPane.showMessageDialog(frmSesion, "No existe el usuario.");
             }

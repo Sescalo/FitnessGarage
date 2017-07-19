@@ -8,7 +8,9 @@ package Vista;
 import Controlador.ManejadorAdminUsuario;
 import Modelo.AdminBaseDatos;
 import Modelo.Usuario;
+import java.awt.Color;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JTextField;
 
 /**
@@ -26,6 +28,7 @@ public class FrmAdminUsuario extends javax.swing.JFrame {
     
     public FrmAdminUsuario(AdminBaseDatos conexion, FrmMenu frmMenu) {
         initComponents();
+        this.btnEliminar.setBackground(Color.red);
         this.conexion = conexion;
         this.frmMenu = frmMenu;
         this.txtIdUsuario.setEnabled(false);
@@ -96,16 +99,35 @@ public class FrmAdminUsuario extends javax.swing.JFrame {
     public void setTxtIdUsuario(int txtIdUsuario) {
         this.txtIdUsuario.setText(String.valueOf(txtIdUsuario));
     }
+
+    public FrmMenu getFrmMenu() {
+        return frmMenu;
+    }
+
+    public void setFrmMenu(FrmMenu frmMenu) {
+        this.frmMenu = frmMenu;
+    }
     
     public void mostrarInfoUsuario(Usuario usuario){
         this.txtIdUsuario.setText(String.valueOf(usuario.getIdUsuario()));
         this.txtNombreUsuario.setText(usuario.getNombreUsuario());
+        this.txtContrasena.setText(usuario.getContrasena());
         this.txtNombre.setText(usuario.getNombre());
         this.txtPriApellido.setText(usuario.getPrimerApellido());
         this.txtSegApellido.setText(usuario.getSegundoApellido());
     }
+
+    public JButton getBtnEliminar() {
+        return btnEliminar;
+    }
+
+    public void setBtnEliminar(JButton btnEliminar) {
+        this.btnEliminar = btnEliminar;
+    }
     
-    
+    public JTextField getJTextContra(){
+        return this.txtContrasena;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
