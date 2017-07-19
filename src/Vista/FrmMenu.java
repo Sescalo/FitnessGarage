@@ -25,6 +25,8 @@ public class FrmMenu extends javax.swing.JFrame {
     
     public FrmMenu() throws ClassNotFoundException, SQLException {
         initComponents();
+        this.nombreUsuario.setVisible(false);
+        deshabilitarComponentes();
         this.conexion = new AdminBaseDatos();
         this.frmSesion = new FrmSesion(conexion, this);
         this.frmAdminCliente = new FrmAdminCliente(conexion, this);
@@ -53,6 +55,7 @@ public class FrmMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        nombreUsuario = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmSesion = new javax.swing.JMenu();
         jmiIniciarSesion = new javax.swing.JMenuItem();
@@ -68,6 +71,8 @@ public class FrmMenu extends javax.swing.JFrame {
         setResizable(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/grande.png"))); // NOI18N
+
+        nombreUsuario.setText("jLabel2");
 
         jmSesion.setText("Sesión");
 
@@ -137,7 +142,7 @@ public class FrmMenu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 32, Short.MAX_VALUE))
         );
 
         pack();
@@ -222,5 +227,6 @@ public class FrmMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiIniciarSesion;
     private javax.swing.JMenuItem jmiSalir;
     private javax.swing.JMenuItem jmiTblClientes;
+    private javax.swing.JLabel nombreUsuario;
     // End of variables declaration//GEN-END:variables
 }
