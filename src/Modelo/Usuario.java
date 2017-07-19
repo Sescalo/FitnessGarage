@@ -31,10 +31,19 @@ public class Usuario {
         this.segundoApellido = segundoApellido;
         this.eliminado = eliminado;
     }
+    
+    public Usuario(String nombreUsuario, String contrasena, String nombre, String primerApellido, String segundoApellido, boolean eliminado) {
+        this.nombreUsuario = nombreUsuario;
+        this.contrasena = encriptarContra(contrasena);
+        this.nombre = nombre;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
+        this.eliminado = eliminado;
+    }
 
     public Usuario(String nombreUsuario, String contrasena) {
         this.nombreUsuario = nombreUsuario;
-        this.contrasena = contrasena;
+        this.contrasena = encriptarContra(contrasena);
     }
     
 

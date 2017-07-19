@@ -36,7 +36,7 @@ public class FrmClientes extends javax.swing.JFrame {
         this.setTablaCliente(conexion.getClientes());
         tblClientes.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         JTableHeader header = tblClientes.getTableHeader();
-        header.setBackground(Color.green); //or some other color 
+        header.setBackground(Color.red);
         this.modelo = (DefaultTableModel) tblClientes.getModel();
         
         tblClientes.setDefaultRenderer(Object.class, new MyCellRenderer());

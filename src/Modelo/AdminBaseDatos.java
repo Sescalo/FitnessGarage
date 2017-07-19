@@ -55,7 +55,7 @@ public class AdminBaseDatos {
         return listaClientes;
     }
     
-        private boolean existeCliente(Cliente cliente){
+        public boolean existeCliente(Cliente cliente){
         boolean existe = false;
         try{
             stmt = conn.createStatement();
@@ -71,7 +71,7 @@ public class AdminBaseDatos {
         return existe;
     }
         
-    private void agregarCliente(Cliente cliente){
+    public void agregarCliente(Cliente cliente){
         try{
             prepStmt = conn.prepareStatement("insert into cliente (diasVencimiento, nombreCliente, primerApellido, segundoApellido,"
                     + "cedula, telefono, direccion, email, fechaIngreso, fechaPago, fechaSigPago, morosidades, comentarios, tratoEspecial, eliminado) "
@@ -108,7 +108,7 @@ public class AdminBaseDatos {
         }
     }
     
-    private void modificarCliente(Cliente cliente){
+    public void modificarCliente(Cliente cliente){
         try{
                 prepStmt = conn.prepareStatement("update cliente set diasVencimiento = ?, nombreCliente = ?, "
                         + "primerApellido = ?, segundoApellido = ?, cedula = ?, telefono = ?, direccion = ?, email = ?,"
@@ -144,7 +144,7 @@ public class AdminBaseDatos {
             }
     }
     
-    private void eliminarCliente(Cliente cliente){
+    public void eliminarCliente(Cliente cliente){
         try{
                 prepStmt = conn.prepareStatement("update cliente set eliminado = ? where idCliente = ? and eliminado ='0';");
                 
@@ -164,7 +164,7 @@ public class AdminBaseDatos {
             }
     }
         
-    private Cliente buscarCliente(String nombre, String primerApellido){
+    public Cliente buscarCliente(String nombre, String primerApellido){
         Cliente cliente = null;
         try{
             stmt = conn.createStatement();
@@ -201,7 +201,7 @@ public class AdminBaseDatos {
         return existe;
     }
     
-    private void agregarUsuario(Usuario usuario){
+    public void agregarUsuario(Usuario usuario){
         try{
             prepStmt = conn.prepareStatement("insert into Usuario (nombreUsuario, contrasena, nombre, primerApellido, segundoApellido, eliminado) VALUES (?,?,?,?,?,?);");
 
@@ -247,7 +247,7 @@ public class AdminBaseDatos {
         return listaUsuarios;
     }
     
-    private void modificarUsuario(Usuario usuario){
+    public void modificarUsuario(Usuario usuario){
         try{
                 prepStmt = conn.prepareStatement("update usuario set nombreUsuario = ?, nombre = ?, primerApellido = ?, "
                         + "segundoApellido = ? where idUsuario = ? and eliminado = '0';");
@@ -272,12 +272,12 @@ public class AdminBaseDatos {
             }
     }
     
-    private void eliminarUsuario(Usuario usuario){
+    public void eliminarUsuario(int idUsuario){
         try{
                 prepStmt = conn.prepareStatement("update usuario set eliminado = ? where idUsuario = ? and eliminado ='0';");
                 
                 prepStmt.setBoolean(1, true);
-                prepStmt.setInt(2, usuario.getIdUsuario());
+                prepStmt.setInt(2, idUsuario);
                 
                 int res = prepStmt.executeUpdate();
                     if(res>0){
@@ -292,7 +292,7 @@ public class AdminBaseDatos {
             }
     }
     
-    private Usuario buscarUsuario(String nombre, String primerApellido){
+    public Usuario buscarUsuario(String nombre, String primerApellido){
         Usuario usuario = null;
         try{
             stmt = conn.createStatement();

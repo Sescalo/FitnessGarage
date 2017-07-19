@@ -3,12 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Sergio/Documents/GitHub/FitnessGarage/src/Modelo/Validaciones.java</file>
             <file>file:/C:/Users/Sergio/Documents/GitHub/FitnessGarage/src/Modelo/Cliente.java</file>
             <file>file:/C:/Users/Sergio/Documents/GitHub/FitnessGarage/src/Vista/PnlAdminCliente.java</file>
             <file>file:/C:/Users/Sergio/Documents/GitHub/FitnessGarage/src/Vista/FrmClientes.java</file>
             <file>file:/C:/Users/Sergio/Documents/GitHub/FitnessGarage/src/Modelo/prueba.java</file>
+            <file>file:/C:/Users/Sergio/Documents/GitHub/FitnessGarage/src/Vista/FrmAdminUsuario.java</file>
             <file>file:/C:/Users/Sergio/Documents/GitHub/FitnessGarage/src/Vista/FrmAdminCliente.java</file>
-            <file>file:/C:/Users/Sergio/Documents/GitHub/FitnessGarage/src/Modelo/TableHorizontal.java</file>
+            <file>file:/C:/Users/Sergio/Documents/GitHub/FitnessGarage/src/Vista/MyCellRenderer.java</file>
+            <file>file:/C:/Users/Sergio/Documents/GitHub/FitnessGarage/src/Controlador/ManejadorSesion.java</file>
+            <file>file:/C:/Users/Sergio/Documents/GitHub/FitnessGarage/src/Vista/FrmMenu.java</file>
+            <file>file:/C:/Users/Sergio/Documents/GitHub/FitnessGarage/src/Vista/FrmSesion.java</file>
         </group>
     </open-files>
 </project-private>
