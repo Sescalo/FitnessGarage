@@ -16,18 +16,19 @@ public class MyCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
     
     public java.awt.Component getTableCellRendererComponent(javax.swing.JTable table, java.lang.Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             final java.awt.Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
             Object fechaPago = table.getValueAt(row, 10);
             Object seleccionado = table.getValueAt(row, 14);
             String sval = fechaPago.toString();
             Validaciones validaciones = new Validaciones();
             boolean unDia = validaciones.calcularDiaAntes(sval);
+            String sseleccionado = seleccionado.toString();
+            boolean esSeleccionado = Boolean.valueOf(sseleccionado);
             if (unDia) {
                 cellComponent.setForeground(Color.black);
                 cellComponent.setBackground(Color.red);
 
             } 
-            else if (seleccionado != null) {
+            else if (esSeleccionado) {
                 cellComponent.setForeground(Color.black);
                 cellComponent.setBackground(Color.blue);
             }

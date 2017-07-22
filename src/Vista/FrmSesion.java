@@ -17,11 +17,13 @@ public class FrmSesion extends javax.swing.JFrame {
 
     private AdminBaseDatos conexion;
     private FrmMenu frmMenu;
+    private FrmTablaMorosos frmMorosos;
     
-    public FrmSesion(AdminBaseDatos conexion,FrmMenu frmMenu) {
+    public FrmSesion(AdminBaseDatos conexion,FrmMenu frmMenu, FrmTablaMorosos frmMorosos) {
         initComponents();
         this.conexion= conexion;
         this.frmMenu= frmMenu;
+        this.frmMorosos = frmMorosos;
         ManejadorSesion manejador= new ManejadorSesion(this);
         escuchar(manejador);
         
@@ -46,6 +48,14 @@ public class FrmSesion extends javax.swing.JFrame {
 
     public void setFrmMenu(FrmMenu frmMenu) {
         this.frmMenu = frmMenu;
+    }
+
+    public FrmTablaMorosos getFrmMorosos() {
+        return frmMorosos;
+    }
+
+    public void setFrmMorosos(FrmTablaMorosos frmMorosos) {
+        this.frmMorosos = frmMorosos;
     }
     
     

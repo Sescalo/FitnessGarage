@@ -10,6 +10,8 @@ import Modelo.AdminBaseDatos;
 import Modelo.Usuario;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -35,6 +37,43 @@ public class FrmAdminUsuario extends javax.swing.JFrame {
         this.txtIdUsuario.setEnabled(false);
         ManejadorAdminUsuario manejador= new ManejadorAdminUsuario(this);
         escuchar(manejador);
+        this.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                limpiar();
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
     }
     
     public void escuchar(ActionListener manejador){
@@ -129,6 +168,26 @@ public class FrmAdminUsuario extends javax.swing.JFrame {
     public JTextField getJTextContra(){
         return this.txtContrasena;
     }
+    
+    public void limpiar(){
+       this.txtContrasena.setText("");
+       this.txtIdUsuario.setText("");
+       this.txtNombre.setText("");
+       this.txtNombreUsuario.setText("");
+       this.txtPriApellido.setText("");
+       this.txtSegApellido.setText("");
+    }
+
+    public JButton getBtnModificar() {
+        return btnModificar;
+    }
+
+    public void setBtnModificar(JButton btnModificar) {
+        this.btnModificar = btnModificar;
+    }
+    
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -183,6 +242,7 @@ public class FrmAdminUsuario extends javax.swing.JFrame {
         btnIncluir.setText("Incluir");
 
         btnModificar.setText("Modificar");
+        btnModificar.setEnabled(false);
 
         btnMostrar.setText("Mostrar");
 

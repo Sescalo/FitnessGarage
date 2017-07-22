@@ -11,8 +11,8 @@ public class AdminBaseDatos {
     private static final String DB_URL = "jdbc:mysql://localhost/fitnessgarage";
     
     //  Usuario
-    private static final String USER = "Michelt";
-    private static final String PASS = "Michelt3112";
+    private static final String USER = "Sescalo";
+    private static final String PASS = "sergioesteban96";
 
 //    private static final String USER = "oskrg1130";
 //    private static final String PASS = "noob3001";
@@ -109,10 +109,18 @@ public class AdminBaseDatos {
     }
     
     public void modificarCliente(Cliente cliente){
+        int tmpTrato;
+        if(cliente.isTratoEspecial()){
+            tmpTrato = 1;
+        }else{
+            tmpTrato =0;
+        }
+        System.out.println(tmpTrato);
         try{
+            System.out.println(cliente.toString());
                 prepStmt = conn.prepareStatement("update cliente set diasVencimiento = ?, nombreCliente = ?, "
                         + "primerApellido = ?, segundoApellido = ?, cedula = ?, telefono = ?, direccion = ?, email = ?,"
-                        + "fechaIngreso = ?, fechaPago = ?, fechaSigPago = ?, morosidades = ?, comentarios = ?, tratoEspecial = ?,"
+                        + "fechaIngreso = ?, fechaPago = ?, fechaSigPago = ?, morosidades = ?, comentarios = ?, tratoEspecial = '"+tmpTrato+"'"
                         + "where idCliente = ? and eliminado = '0';");
                 
                 prepStmt.setInt(1, cliente.getDiasVencimiento());
@@ -128,8 +136,8 @@ public class AdminBaseDatos {
                 prepStmt.setString(11, cliente.getFechaSigPago());
                 prepStmt.setString(12, cliente.getMorosidades());
                 prepStmt.setString(13, cliente.getComentarios());
-                prepStmt.setBoolean(14, cliente.isTratoEspecial());
-                
+//                prepStmt.setInt(14, tmpTrato);
+                prepStmt.setInt(14, cliente.getIdCliente());
                 int res = prepStmt.executeUpdate();
                     if(res>0){
                         System.out.println("Cliente Actualizado");
@@ -257,7 +265,6 @@ public class AdminBaseDatos {
                 prepStmt.setString(3, usuario.getPrimerApellido());
                 prepStmt.setString(4, usuario.getSegundoApellido());
                 prepStmt.setInt(5, usuario.getIdUsuario());
-                
                 int res = prepStmt.executeUpdate();
                     if(res>0){
                         System.out.println("Usuario Actualizado");

@@ -30,6 +30,7 @@ public class ManejadorAdminUsuario implements ActionListener{
     }
     
     public Usuario usuarioVacio(){
+        int idUsuario = frmAdminUsuario.getTxtIdUsuario();
         String nombreUsuario = frmAdminUsuario.getTxtNombreUsuario();
         String contrasena = frmAdminUsuario.getTxtContrasena();
         String nombre = frmAdminUsuario.getTxtNombre();
@@ -38,7 +39,7 @@ public class ManejadorAdminUsuario implements ActionListener{
         if (nombreUsuario.equalsIgnoreCase("") || contrasena.equalsIgnoreCase("") || nombre.equalsIgnoreCase("") || primerApellido.equalsIgnoreCase("") || segundoApellido.equalsIgnoreCase("")){
             return null;
         } else {
-            return new Usuario(nombreUsuario, contrasena, nombre, primerApellido, segundoApellido, false);
+            return new Usuario(idUsuario, nombreUsuario, contrasena, nombre, primerApellido, segundoApellido, false);
         }
     }
     
@@ -69,6 +70,7 @@ public class ManejadorAdminUsuario implements ActionListener{
         Usuario usuario;
         if(ae.getActionCommand().equalsIgnoreCase("Salir")){
            frmAdminUsuario.dispose();
+           frmAdminUsuario.limpiar();
         }
         if(ae.getActionCommand().equalsIgnoreCase("Incluir")){
             usuario = usuarioVacio();
@@ -99,6 +101,7 @@ public class ManejadorAdminUsuario implements ActionListener{
                 usuario = conexion.buscarUsuario(nombre, primerApellido);
                 if (usuario != null){
                     frmAdminUsuario.mostrarInfoUsuario(usuario);
+                    frmAdminUsuario.getBtnModificar().setEnabled(true);
                 } else {
                     JOptionPane.showMessageDialog(frmAdminUsuario, "El usuario no existe.");
                 }

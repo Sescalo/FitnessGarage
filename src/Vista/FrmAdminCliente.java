@@ -8,6 +8,8 @@ package Vista;
 
 import Controlador.ManejadorAdminCliente;
 import Modelo.AdminBaseDatos;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -30,6 +32,43 @@ public class FrmAdminCliente extends javax.swing.JFrame {
         JScrollPane scrollPane = new JScrollPane(this.pnlAdminCliente1);
         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
         this.setContentPane(scrollPane);
+        this.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+               limpiarFrame();
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
     }
 
     public PnlAdminCliente getPnlAdminCliente1() {
@@ -49,7 +88,9 @@ public class FrmAdminCliente extends javax.swing.JFrame {
     }
     
     
-
+    public void limpiarFrame(){
+        this.pnlAdminCliente1.limpiar();
+    }
 
 
     /** This method is called from within the constructor to

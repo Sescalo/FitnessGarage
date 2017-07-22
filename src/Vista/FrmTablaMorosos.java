@@ -32,14 +32,13 @@ public class FrmTablaMorosos extends javax.swing.JFrame {
         initComponents();
         this.conexion=conexion;
         this.frmMenu = frmMenu;
-        this.validaciones= validaciones;
+        this.validaciones= new Validaciones();
         this.setTablaMorosos(conexion.getClientes());
         tblMorosos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         JTableHeader header = tblMorosos.getTableHeader();
         header.setBackground(Color.red);
         this.modelo = (DefaultTableModel) tblMorosos.getModel();
         
-        tblMorosos.setDefaultRenderer(Object.class, new MyCellRenderer());
     }
     
     public void escuchar(ActionListener manejador){
@@ -48,15 +47,15 @@ public class FrmTablaMorosos extends javax.swing.JFrame {
     }
     
     public void setTablaMorosos(ArrayList<Cliente> clientes){
-        DefaultTableModel modelo=(DefaultTableModel) this.tblMorosos.getModel();
-        for(Cliente cliente:clientes){
-            if(this.validaciones.calcularDiaAntes(cliente.getFechaPago())==true){
+        DefaultTableModel modelo = (DefaultTableModel) this.tblMorosos.getModel();
+       for(Cliente cliente: clientes){
+           if(validaciones.calcularDiaAntes(cliente.getFechaPago())){
                 Object[] tmp={cliente.getIdCliente(),cliente.getDiasVencimiento(),cliente.getNombreCliente(),cliente.getPrimerApellido(),cliente.getSegundoApellido(),
                 cliente.getCedula(),cliente.getTelefono(),cliente.getDireccion(),cliente.getEmail(),cliente.getFechaIngreso(),
                 cliente.getFechaPago(),cliente.getFechaSigPago(),cliente.getMorosidades(),cliente.getComentarios(),cliente.isTratoEspecial()};
                 modelo.addRow(tmp);
-            }
-        }
+           }
+       }
     
     }
 
@@ -74,13 +73,11 @@ public class FrmTablaMorosos extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tblMorosos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                { new Integer(1),  new Integer(11), null, null, null, null, null, null, null, null, "12/07/2017", null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, "15/07/2017", null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, "15/07/2017", null, null, null, null}
+
             },
             new String [] {
                 "ID Clientes", "Días restantes para vencimiento", "Nombre", "Primer Apellido", "Segundo Apellido", "Cedula", "Telefono", "Dirección", "E-mail", "Fecha de Ingreso", "Fecha de Pago", "Fecha del próximo pago", "Morosidades", "Comentarios", "Trato Especial"
@@ -96,8 +93,30 @@ public class FrmTablaMorosos extends javax.swing.JFrame {
         });
         tblMorosos.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblMorosos);
+        if (tblMorosos.getColumnModel().getColumnCount() > 0) {
+            tblMorosos.getColumnModel().getColumn(0).setPreferredWidth(100);
+            tblMorosos.getColumnModel().getColumn(1).setPreferredWidth(120);
+            tblMorosos.getColumnModel().getColumn(2).setPreferredWidth(100);
+            tblMorosos.getColumnModel().getColumn(3).setPreferredWidth(120);
+            tblMorosos.getColumnModel().getColumn(4).setPreferredWidth(110);
+            tblMorosos.getColumnModel().getColumn(5).setPreferredWidth(110);
+            tblMorosos.getColumnModel().getColumn(6).setPreferredWidth(110);
+            tblMorosos.getColumnModel().getColumn(7).setPreferredWidth(330);
+            tblMorosos.getColumnModel().getColumn(8).setPreferredWidth(140);
+            tblMorosos.getColumnModel().getColumn(9).setPreferredWidth(120);
+            tblMorosos.getColumnModel().getColumn(10).setPreferredWidth(120);
+            tblMorosos.getColumnModel().getColumn(11).setPreferredWidth(120);
+            tblMorosos.getColumnModel().getColumn(12).setPreferredWidth(150);
+            tblMorosos.getColumnModel().getColumn(13).setPreferredWidth(200);
+            tblMorosos.getColumnModel().getColumn(14).setPreferredWidth(100);
+        }
 
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
@@ -134,6 +153,11 @@ public class FrmTablaMorosos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments

@@ -150,6 +150,15 @@ public class PnlAdminCliente extends javax.swing.JPanel {
         this.btnEliminar = btnEliminar;
     }
 
+    public JButton getBtnModificar() {
+        return btnModificar;
+    }
+
+    public void setBtnModificar(JButton btnModificar) {
+        this.btnModificar = btnModificar;
+    }
+    
+
     public void mostrarInfoCliente(Cliente cliente){
         this.txtDiasRestantes.setText(String.valueOf(cliente.getDiasVencimiento()));
         this.txtNombre.setText(cliente.getNombreCliente());
@@ -165,6 +174,23 @@ public class PnlAdminCliente extends javax.swing.JPanel {
         this.txtMorosidades.setText(cliente.getMorosidades());
         this.txtAComentario.setText(cliente.getComentarios());
         this.chboxTratoEspecial.setSelected(cliente.isTratoEspecial());
+    }
+    
+    public void limpiar(){
+       this.txtAComentario.setText("");
+       this.txtCedula.setText("");
+       this.txtDiasRestantes.setText("");
+       this.txtDireccion.setText("");
+       this.txtEmail.setText("");
+       this.txtFechaIngreso.setText("");
+       this.txtFechaPago.setText("");
+       this.txtFechaProxPago.setText("");
+       this.txtMorosidades.setText("");
+       this.txtNombre.setText("");
+       this.txtPrimApellido.setText("");
+       this.txtSegApellido.setText("");
+       this.txtTelefono.setText("");
+       this.chboxTratoEspecial.setSelected(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -240,6 +266,7 @@ public class PnlAdminCliente extends javax.swing.JPanel {
         btnIncluir.setText("Incluir");
 
         btnModificar.setText("Modificar");
+        btnModificar.setEnabled(false);
 
         btnMostrar.setText("Mostrar");
 

@@ -199,7 +199,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "idCliente=" + idCliente + ", diasVencimiento=" + diasVencimiento + ", nombreCliente=" + nombreCliente + ", primerApellido=" + primerApellido + ", segundoApellido=" + segundoApellido + ", cedula=" + cedula + ", telefono=" + telefono + ", direccion=" + direccion + ", email=" + email + ", fechaIngreso=" + fechaIngreso + ", fechaPago=" + fechaPago + ", fechaSigPago=" + fechaSigPago + ", comentarios=" + comentarios + '}';
+        return "Cliente{" + "idCliente=" + idCliente + ", diasVencimiento=" + diasVencimiento + ", nombreCliente=" + nombreCliente + ", primerApellido=" + primerApellido + ", segundoApellido=" + segundoApellido + ", cedula=" + cedula + ", telefono=" + telefono + ", direccion=" + direccion + ", email=" + email + ", fechaIngreso=" + fechaIngreso + ", fechaPago=" + fechaPago + ", fechaSigPago=" + fechaSigPago + ", comentarios=" + comentarios + ", tratoEspecial=" + tratoEspecial +", eliminado=" + eliminado +'}';
     }
     
     

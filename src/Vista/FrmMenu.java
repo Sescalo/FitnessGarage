@@ -32,11 +32,12 @@ public class FrmMenu extends javax.swing.JFrame {
         this.nombreUsuario.setVisible(false);
         deshabilitarComponentes();
         this.conexion = new AdminBaseDatos();
-        this.frmSesion = new FrmSesion(conexion, this);
+        this.frmMorosos = new FrmTablaMorosos(conexion,this);
+        this.frmSesion = new FrmSesion(conexion, this, frmMorosos);
         this.frmAdminCliente = new FrmAdminCliente(conexion, this);
         this.frmAdminUsuario = new FrmAdminUsuario(conexion, this);
         this.frmCliente = new FrmClientes(conexion, this);
-        this.frmMorosos = new FrmTablaMorosos(conexion,this);
+        
         
     }
     

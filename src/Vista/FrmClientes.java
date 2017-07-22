@@ -79,9 +79,7 @@ public class FrmClientes extends javax.swing.JFrame {
 
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                { new Integer(1),  new Integer(11), null, null, null, null, null, null, null, null, "12/07/2017", null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, "15/07/2017", null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, "15/07/2017", null, null, null, null}
+
             },
             new String [] {
                 "ID Clientes", "Días restantes para vencimiento", "Nombre", "Primer Apellido", "Segundo Apellido", "Cedula", "Telefono", "Dirección", "E-mail", "Fecha de Ingreso", "Fecha de Pago", "Fecha del próximo pago", "Morosidades", "Comentarios", "Trato Especial"

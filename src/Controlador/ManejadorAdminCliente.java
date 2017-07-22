@@ -47,6 +47,7 @@ public class ManejadorAdminCliente implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if(ae.getActionCommand().equalsIgnoreCase("Salir")){
              frmAdminCliente.dispose();
+             frmAdminCliente.getPnlAdminCliente1().limpiar();
         }
         if(ae.getActionCommand().equalsIgnoreCase("Incluir")){
             Cliente cliente = clienteVacio();
@@ -64,11 +65,15 @@ public class ManejadorAdminCliente implements ActionListener {
         }
         if(ae.getActionCommand().equalsIgnoreCase("Modificar")){
             Cliente cliente = clienteVacio();
+            Cliente tmp = new Cliente();
             if(cliente != null){
+                tmp = conexion.buscarCliente(cliente.getNombreCliente(), cliente.getPrimerApellido());
+                int id = tmp.getIdCliente();
+                cliente.setIdCliente(id);
                 if(validaciones.validarNombres(cliente.getNombreCliente(), cliente.getPrimerApellido(), cliente.getSegundoApellido()) 
                         && validaciones.validarFecha(cliente.getFechaIngreso()) && validaciones.validarFecha(cliente.getFechaPago())){
                     conexion.modificarCliente(cliente);
-                    JOptionPane.showMessageDialog(frmAdminCliente, "Cliente agregado correctamente.");
+                    JOptionPane.showMessageDialog(frmAdminCliente, "Cliente modificado correctamente.");
                 } else {
                     JOptionPane.showMessageDialog(frmAdminCliente, "Error en los campos de nombre y fecha.");
                 }
@@ -84,6 +89,7 @@ public class ManejadorAdminCliente implements ActionListener {
                 Cliente cliente = conexion.buscarCliente(nombre, primerApellido);
                 if (cliente != null){
                     frmAdminCliente.getPnlAdminCliente1().mostrarInfoCliente(cliente);
+                    frmAdminCliente.getPnlAdminCliente1().getBtnModificar().setEnabled(true);
                 } else {
                     JOptionPane.showMessageDialog(frmAdminCliente, "El cliente no existe.");
                 }

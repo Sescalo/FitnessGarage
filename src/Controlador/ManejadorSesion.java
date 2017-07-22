@@ -26,7 +26,7 @@ public class ManejadorSesion implements ActionListener{
     public ManejadorSesion(FrmSesion frmSesion) {
         this.frmSesion = frmSesion;
         this.conexion= this.frmSesion.getConexion();
-        this.frmMorosos=frmMorosos;
+        this.frmMorosos = frmSesion.getFrmMorosos();
     }
     
     @Override
