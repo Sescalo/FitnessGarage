@@ -8,6 +8,7 @@ package Controlador;
 import Modelo.AdminBaseDatos;
 import Modelo.Usuario;
 import Vista.FrmSesion;
+import Vista.FrmTablaMorosos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -20,10 +21,12 @@ public class ManejadorSesion implements ActionListener{
 
     private FrmSesion frmSesion;
     private AdminBaseDatos conexion;
+    private FrmTablaMorosos frmMorosos;
 
     public ManejadorSesion(FrmSesion frmSesion) {
         this.frmSesion = frmSesion;
         this.conexion= this.frmSesion.getConexion();
+        this.frmMorosos=frmMorosos;
     }
     
     @Override
@@ -42,6 +45,7 @@ public class ManejadorSesion implements ActionListener{
                     frmSesion.dispose();
                     frmSesion.setTxtSesionUsuario("");
                     frmSesion.setTxtContrasena("");
+                    frmMorosos.setVisible(true);
                     if(!nombreUsuario.equalsIgnoreCase("scampos")){
                         frmSesion.getFrmMenu().getFrmAdminUsuario().getBtnEliminar().setEnabled(false);
                         frmSesion.getFrmMenu().getFrmAdminUsuario().getJTextContra().setVisible(false);

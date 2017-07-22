@@ -6,9 +6,11 @@
 package Vista;
 
 import Modelo.AdminBaseDatos;
+import java.awt.Image;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 
@@ -22,6 +24,7 @@ public class FrmMenu extends javax.swing.JFrame {
     private FrmAdminCliente frmAdminCliente;
     private FrmAdminUsuario frmAdminUsuario;
     private FrmClientes frmCliente;
+    private FrmTablaMorosos frmMorosos;
     private AdminBaseDatos conexion;
     
     public FrmMenu() throws ClassNotFoundException, SQLException {
@@ -33,6 +36,8 @@ public class FrmMenu extends javax.swing.JFrame {
         this.frmAdminCliente = new FrmAdminCliente(conexion, this);
         this.frmAdminUsuario = new FrmAdminUsuario(conexion, this);
         this.frmCliente = new FrmClientes(conexion, this);
+        this.frmMorosos = new FrmTablaMorosos(conexion,this);
+        
     }
     
     public void deshabilitarComponentes() {
@@ -86,6 +91,15 @@ public class FrmMenu extends javax.swing.JFrame {
         this.frmCliente = frmCliente;
     }
 
+    public FrmTablaMorosos getFrmMorosos() {
+        return frmMorosos;
+    }
+
+    public void setFrmMorosos(FrmTablaMorosos frmMorosos) {
+        this.frmMorosos = frmMorosos;
+    }
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -106,10 +120,10 @@ public class FrmMenu extends javax.swing.JFrame {
         jmiTblClientes = new javax.swing.JMenuItem();
         jmiAdminUsuarios = new javax.swing.JMenuItem();
         jmiAdminClientes = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(902, 528));
-        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(902, 540));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/grande.png"))); // NOI18N
 
@@ -169,6 +183,14 @@ public class FrmMenu extends javax.swing.JFrame {
         });
         jmMantenimiento.add(jmiAdminClientes);
 
+        jMenuItem1.setText("Tabla de Avisos de pago");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jmMantenimiento.add(jMenuItem1);
+
         jMenuBar1.add(jmMantenimiento);
 
         setJMenuBar(jMenuBar1);
@@ -177,13 +199,15 @@ public class FrmMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(0, 32, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -214,6 +238,10 @@ public class FrmMenu extends javax.swing.JFrame {
         jmiIniciarSesion.setEnabled(true);
         jmiCerrarSesion.setEnabled(false);
     }//GEN-LAST:event_jmiCerrarSesionActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        frmMorosos.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,6 +288,7 @@ public class FrmMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jmMantenimiento;
     private javax.swing.JMenu jmSesion;
     private javax.swing.JMenuItem jmiAdminClientes;
