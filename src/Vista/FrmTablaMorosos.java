@@ -28,7 +28,7 @@ public class FrmTablaMorosos extends javax.swing.JFrame {
     /**
      * Creates new form FrmTablaMorosos
      */
-    public FrmTablaMorosos(AdminBaseDatos conexion, FrmMenu frmMenu) {
+    public FrmTablaMorosos(AdminBaseDatos conexion, FrmMenu frmMenu,Validaciones validaciones) {
         initComponents();
         this.conexion=conexion;
         this.frmMenu = frmMenu;
@@ -74,7 +74,7 @@ public class FrmTablaMorosos extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tblMorosos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -96,8 +96,30 @@ public class FrmTablaMorosos extends javax.swing.JFrame {
         });
         tblMorosos.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblMorosos);
+        if (tblMorosos.getColumnModel().getColumnCount() > 0) {
+            tblMorosos.getColumnModel().getColumn(0).setPreferredWidth(100);
+            tblMorosos.getColumnModel().getColumn(1).setPreferredWidth(120);
+            tblMorosos.getColumnModel().getColumn(2).setPreferredWidth(100);
+            tblMorosos.getColumnModel().getColumn(3).setPreferredWidth(120);
+            tblMorosos.getColumnModel().getColumn(4).setPreferredWidth(120);
+            tblMorosos.getColumnModel().getColumn(5).setPreferredWidth(110);
+            tblMorosos.getColumnModel().getColumn(6).setPreferredWidth(100);
+            tblMorosos.getColumnModel().getColumn(7).setPreferredWidth(330);
+            tblMorosos.getColumnModel().getColumn(8).setPreferredWidth(140);
+            tblMorosos.getColumnModel().getColumn(9).setPreferredWidth(100);
+            tblMorosos.getColumnModel().getColumn(10).setPreferredWidth(100);
+            tblMorosos.getColumnModel().getColumn(11).setPreferredWidth(100);
+            tblMorosos.getColumnModel().getColumn(12).setPreferredWidth(150);
+            tblMorosos.getColumnModel().getColumn(13).setPreferredWidth(200);
+            tblMorosos.getColumnModel().getColumn(14).setPreferredWidth(100);
+        }
 
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
@@ -134,6 +156,10 @@ public class FrmTablaMorosos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+      this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments

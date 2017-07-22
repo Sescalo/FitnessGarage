@@ -104,6 +104,7 @@ public class FrmClientes extends javax.swing.JFrame {
             tblClientes.getColumnModel().getColumn(3).setPreferredWidth(120);
             tblClientes.getColumnModel().getColumn(4).setPreferredWidth(110);
             tblClientes.getColumnModel().getColumn(5).setPreferredWidth(110);
+            tblClientes.getColumnModel().getColumn(6).setPreferredWidth(100);
             tblClientes.getColumnModel().getColumn(7).setPreferredWidth(330);
             tblClientes.getColumnModel().getColumn(8).setPreferredWidth(140);
             tblClientes.getColumnModel().getColumn(9).setPreferredWidth(100);

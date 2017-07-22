@@ -7,6 +7,7 @@ package Vista;
 
 import Modelo.AdminBaseDatos;
 import java.awt.Image;
+import Modelo.Validaciones;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,17 +27,18 @@ public class FrmMenu extends javax.swing.JFrame {
     private FrmClientes frmCliente;
     private FrmTablaMorosos frmMorosos;
     private AdminBaseDatos conexion;
+    private Validaciones validaciones;
     
     public FrmMenu() throws ClassNotFoundException, SQLException {
         initComponents();
         this.nombreUsuario.setVisible(false);
-        deshabilitarComponentes();
+        //deshabilitarComponentes();
         this.conexion = new AdminBaseDatos();
         this.frmSesion = new FrmSesion(conexion, this);
         this.frmAdminCliente = new FrmAdminCliente(conexion, this);
         this.frmAdminUsuario = new FrmAdminUsuario(conexion, this);
         this.frmCliente = new FrmClientes(conexion, this);
-        this.frmMorosos = new FrmTablaMorosos(conexion,this);
+        this.frmMorosos = new FrmTablaMorosos(conexion,this,validaciones);
         
     }
     
