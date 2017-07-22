@@ -47,6 +47,24 @@ public class Cliente {
         this.eliminado = eliminado;
     }
     
+    public Cliente(int diasVencimiento, String nombreCliente, String primerApellido, String segundoApellido, String cedula, String telefono, String direccion, String email, String fechaIngreso, String fechaPago, String fechaSigPago, String morosidades, String comentarios, boolean tratoEspecial, boolean eliminado) {
+        this.diasVencimiento = diasVencimiento;
+        this.nombreCliente = nombreCliente;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
+        this.cedula = cedula;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.email = email;
+        this.fechaIngreso = fechaIngreso;
+        this.fechaPago = fechaPago;
+        this.fechaSigPago = fechaSigPago;
+        this.morosidades = morosidades;
+        this.comentarios = comentarios;
+        this.tratoEspecial = tratoEspecial;
+        this.eliminado = eliminado;
+    }
+    
     public Cliente(){
         
     }

@@ -45,6 +45,7 @@ public class ManejadorSesion implements ActionListener{
                     if(!nombreUsuario.equalsIgnoreCase("scampos")){
                         frmSesion.getFrmMenu().getFrmAdminUsuario().getBtnEliminar().setEnabled(false);
                         frmSesion.getFrmMenu().getFrmAdminUsuario().getJTextContra().setVisible(false);
+                        frmSesion.getFrmMenu().getFrmAdminCliente().getPnlAdminCliente1().getBtnEliminar().setEnabled(false);
                     }
                }else {
                      JOptionPane.showMessageDialog(frmSesion, "No existe el usuario.");

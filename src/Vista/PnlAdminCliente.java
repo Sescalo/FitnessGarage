@@ -5,7 +5,9 @@
  */
 package Vista;
 
+import Modelo.Cliente;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
@@ -48,12 +50,12 @@ public class PnlAdminCliente extends javax.swing.JPanel {
     }
     
 
-    public String getTxtDiasRestantes() {
-        return txtDiasRestantes.getText();
+    public int getTxtDiasRestantes() {
+        return Integer.valueOf(txtDiasRestantes.getText());
     }
 
-    public void setTxtDiasRestantes(String txtDiasRestantes) {
-        this.txtDiasRestantes.setText(txtDiasRestantes);
+    public void setTxtDiasRestantes(int txtDiasRestantes) {
+        this.txtDiasRestantes.setText(String.valueOf(txtDiasRestantes));
     }
 
     public String getTxtDireccion() {
@@ -140,6 +142,30 @@ public class PnlAdminCliente extends javax.swing.JPanel {
          return chboxTratoEspecial.isSelected();
     }
 
+    public JButton getBtnEliminar() {
+        return btnEliminar;
+    }
+
+    public void setBtnEliminar(JButton btnEliminar) {
+        this.btnEliminar = btnEliminar;
+    }
+
+    public void mostrarInfoCliente(Cliente cliente){
+        this.txtDiasRestantes.setText(String.valueOf(cliente.getDiasVencimiento()));
+        this.txtNombre.setText(cliente.getNombreCliente());
+        this.txtPrimApellido.setText(cliente.getPrimerApellido());
+        this.txtSegApellido.setText(cliente.getSegundoApellido());
+        this.txtCedula.setText(cliente.getCedula());
+        this.txtTelefono.setText(cliente.getTelefono());
+        this.txtDireccion.setText(cliente.getDireccion());
+        this.txtEmail.setText(cliente.getEmail());
+        this.txtFechaIngreso.setText(cliente.getFechaIngreso());
+        this.txtFechaPago.setText(cliente.getFechaPago());
+        this.txtFechaProxPago.setText(cliente.getFechaSigPago());
+        this.txtMorosidades.setText(cliente.getMorosidades());
+        this.txtAComentario.setText(cliente.getComentarios());
+        this.chboxTratoEspecial.setSelected(cliente.isTratoEspecial());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

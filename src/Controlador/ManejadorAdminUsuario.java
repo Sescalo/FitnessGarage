@@ -111,7 +111,7 @@ public class ManejadorAdminUsuario implements ActionListener{
                 conexion.eliminarUsuario(frmAdminUsuario.getTxtIdUsuario());
                 JOptionPane.showMessageDialog(frmAdminUsuario, "Usuario eliminado correctamente.");
             } else {
-                JOptionPane.showMessageDialog(frmAdminUsuario, "No puede eliminar este usuario.");
+                JOptionPane.showMessageDialog(frmAdminUsuario, "No se realizaron modificaciones.");
             }
         }
         

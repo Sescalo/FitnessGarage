@@ -8,6 +8,7 @@ package Vista;
 
 import Controlador.ManejadorAdminCliente;
 import Modelo.AdminBaseDatos;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 /**
@@ -30,6 +31,24 @@ public class FrmAdminCliente extends javax.swing.JFrame {
         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
         this.setContentPane(scrollPane);
     }
+
+    public PnlAdminCliente getPnlAdminCliente1() {
+        return pnlAdminCliente1;
+    }
+
+    public void setPnlAdminCliente1(PnlAdminCliente pnlAdminCliente1) {
+        this.pnlAdminCliente1 = pnlAdminCliente1;
+    }
+
+    public AdminBaseDatos getConexion() {
+        return conexion;
+    }
+
+    public void setConexion(AdminBaseDatos conexion) {
+        this.conexion = conexion;
+    }
+    
+    
 
 
 
