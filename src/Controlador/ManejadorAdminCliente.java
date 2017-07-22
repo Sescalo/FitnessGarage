@@ -90,6 +90,7 @@ public class ManejadorAdminCliente implements ActionListener {
                 if (cliente != null){
                     frmAdminCliente.getPnlAdminCliente1().mostrarInfoCliente(cliente);
                     frmAdminCliente.getPnlAdminCliente1().getBtnModificar().setEnabled(true);
+                    frmAdminCliente.getPnlAdminCliente1().getBtnEliminar().setEnabled(true);
                 } else {
                     JOptionPane.showMessageDialog(frmAdminCliente, "El cliente no existe.");
                 }

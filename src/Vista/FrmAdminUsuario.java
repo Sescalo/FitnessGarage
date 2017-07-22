@@ -35,6 +35,7 @@ public class FrmAdminUsuario extends javax.swing.JFrame {
         this.conexion = conexion;
         this.frmMenu = frmMenu;
         this.txtIdUsuario.setEnabled(false);
+        this.btnEliminar.setEnabled(false);
         ManejadorAdminUsuario manejador= new ManejadorAdminUsuario(this);
         escuchar(manejador);
         this.addWindowListener(new WindowListener() {
@@ -133,7 +134,11 @@ public class FrmAdminUsuario extends javax.swing.JFrame {
     }
 
     public int getTxtIdUsuario() {
-        return Integer.valueOf(txtIdUsuario.getText());
+        if (this.txtIdUsuario.getText().equalsIgnoreCase("")){
+            return 0;
+        } else {
+            return Integer.valueOf(this.txtIdUsuario.getText());
+        }
     }
 
     public void setTxtIdUsuario(int txtIdUsuario) {

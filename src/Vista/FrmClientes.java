@@ -35,8 +35,9 @@ public class FrmClientes extends javax.swing.JFrame {
         this.frmMenu = frmMenu;
         this.setTablaCliente(conexion.getClientes());
         tblClientes.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        JTableHeader header = tblClientes.getTableHeader();
-        header.setBackground(Color.red);
+//        JTableHeader header = tblClientes.getTableHeader();
+//        header.setBackground(Color.red);
+        
         this.modelo = (DefaultTableModel) tblClientes.getModel();
         tblClientes.setDefaultRenderer(Object.class, new MyCellRenderer());
         //modelo.setRowColor(0, Color.RED);

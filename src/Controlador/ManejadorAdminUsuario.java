@@ -102,6 +102,7 @@ public class ManejadorAdminUsuario implements ActionListener{
                 if (usuario != null){
                     frmAdminUsuario.mostrarInfoUsuario(usuario);
                     frmAdminUsuario.getBtnModificar().setEnabled(true);
+                    frmAdminUsuario.getBtnEliminar().setEnabled(true);
                 } else {
                     JOptionPane.showMessageDialog(frmAdminUsuario, "El usuario no existe.");
                 }

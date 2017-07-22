@@ -23,6 +23,7 @@ public class PnlAdminCliente extends javax.swing.JPanel {
      */
     public PnlAdminCliente() {
         initComponents();
+        this.btnEliminar.setEnabled(false);
     }
     
     public void escuchar(ActionListener manejador){
