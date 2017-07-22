@@ -38,7 +38,6 @@ public class FrmClientes extends javax.swing.JFrame {
         JTableHeader header = tblClientes.getTableHeader();
         header.setBackground(Color.red);
         this.modelo = (DefaultTableModel) tblClientes.getModel();
-        
         tblClientes.setDefaultRenderer(Object.class, new MyCellRenderer());
         //modelo.setRowColor(0, Color.RED);
         
@@ -116,6 +115,11 @@ public class FrmClientes extends javax.swing.JFrame {
         }
 
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,6 +154,11 @@ public class FrmClientes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments

@@ -28,6 +28,7 @@ public class FrmAdminUsuario extends javax.swing.JFrame {
     
     public FrmAdminUsuario(AdminBaseDatos conexion, FrmMenu frmMenu) {
         initComponents();
+        this.txtContrasena.setVisible(false);
         this.btnEliminar.setBackground(Color.red);
         this.conexion = conexion;
         this.frmMenu = frmMenu;

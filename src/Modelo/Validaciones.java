@@ -77,15 +77,35 @@ public class Validaciones {
         
         String fechaActual = generarFechaActual();
         int dia = Integer.valueOf(fechaActual.substring(0, 2));
-        String mes = fechaActual.substring(3, 5);
-        String ano = fechaActual.substring(6, 10);
+        int mes = Integer.valueOf(fechaActual.substring(3, 5));
+        int ano = Integer.valueOf(fechaActual.substring(6, 10));
         
         //String fechaPago = cliente.getFechaPago();
         int diaPago = Integer.valueOf(fechaPago.substring(0, 2));
-        String mesPago = fechaPago.substring(3, 5);
-        String anoPago = fechaPago.substring(6, 10);
+        int mesPago = Integer.valueOf(fechaPago.substring(3, 5));
+        int anoPago = Integer.valueOf(fechaPago.substring(6, 10));
+        int diaAntPago;
+        if(diaPago == 1 && (mesPago == 1 || mesPago == 3 || mesPago == 5 || mesPago == 7 || mesPago == 8 || mesPago == 10 || mesPago == 12)){
+            diaAntPago = 31;
+        } 
+        else if(diaPago == 1 && (mesPago == 4 || mesPago == 6 || mesPago == 7 || mesPago == 9 || mesPago == 11)){
+            diaAntPago = 30;
+        }
+        else if(diaPago == 1  && mesPago == 2){
+            boolean isLeapYear = ((anoPago % 4 == 0) && (anoPago % 100 != 0) || (anoPago % 400 == 0));
+            if (isLeapYear){
+                diaAntPago = 30;
+            } else {
+                diaAntPago = 29;
+            }
+        }
+        else {
+            diaAntPago = diaPago-1;
+        }
+//        String mesPago = fechaPago.substring(3, 5);
+//        String anoPago = fechaPago.substring(6, 10);
         
-        return dia==diaPago-1 && mes.equals(mesPago) && ano.equals(anoPago);
+        return dia>=diaAntPago || (mes>mesPago || ano>anoPago);
     }
     
     public boolean validarDatosUsuario(Usuario usuario){

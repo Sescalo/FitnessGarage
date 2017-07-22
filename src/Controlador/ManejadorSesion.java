@@ -33,6 +33,7 @@ public class ManejadorSesion implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         if(ae.getActionCommand().equalsIgnoreCase("Salir")){
             frmSesion.dispose();
+            frmSesion.limpiarCamposSesion();
         }
         if(ae.getActionCommand().equalsIgnoreCase("Iniciar Sesión")){
             String nombreUsuario=this.frmSesion.getTxtSesionUsuario();
@@ -53,6 +54,7 @@ public class ManejadorSesion implements ActionListener{
                     }
                }else {
                      JOptionPane.showMessageDialog(frmSesion, "No existe el usuario.");
+                     frmSesion.setTxtContrasena("");
             }
         }else {
                 JOptionPane.showMessageDialog(frmSesion, "Ingrese correctamente los datos.");
