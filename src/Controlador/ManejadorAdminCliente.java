@@ -106,6 +106,7 @@ public class ManejadorAdminCliente implements ActionListener {
                     Cliente cliente = conexion.buscarCliente(nombre, primerApellido);
                     conexion.eliminarCliente(cliente);
                     JOptionPane.showMessageDialog(frmAdminCliente, "Cliente eliminado correctamente.");
+                    
                 }
                 
             } else {

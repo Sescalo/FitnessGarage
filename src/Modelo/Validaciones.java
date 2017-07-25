@@ -102,10 +102,26 @@ public class Validaciones {
         else {
             diaAntPago = diaPago-1;
         }
-//        String mesPago = fechaPago.substring(3, 5);
-//        String anoPago = fechaPago.substring(6, 10);
-        
-        return dia>=diaAntPago || (mes>mesPago || ano>anoPago);
+//        return dia>=diaAntPago || (mesPago-mes<=0 || anoPago-ano<=0);
+//dia>=diaAntPago || (mes>mesPago || ano>anoPago)
+//        System.out.println((mes>mesPago || ano>anoPago)==false);
+//        System.out.println(dia>diaAntPago);
+//        System.out.println("-------------------------------------");
+        if(anoPago < ano){
+            return true;
+        }
+        else if(mesPago-mes==0 && anoPago-ano==0){
+            return dia >= diaAntPago;
+        } 
+        else if (mesPago-mes<0 && anoPago-ano<0) {
+            return true;
+        } 
+        else if(mesPago-mes>0 && anoPago-ano>=0){
+            return false;
+        }
+        else {
+            return false;
+        }
     }
     
     public boolean validarDatosUsuario(Usuario usuario){

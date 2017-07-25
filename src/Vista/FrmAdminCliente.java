@@ -92,6 +92,15 @@ public class FrmAdminCliente extends javax.swing.JFrame {
         this.pnlAdminCliente1.limpiar();
     }
 
+    public FrmMenu getFrmMenu() {
+        return frmMenu;
+    }
+
+    public void setFrmMenu(FrmMenu frmMenu) {
+        this.frmMenu = frmMenu;
+    }
+
+    
 
     /** This method is called from within the constructor to
      * initialize the form.
