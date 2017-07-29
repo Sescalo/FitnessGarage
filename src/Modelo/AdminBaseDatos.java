@@ -115,9 +115,7 @@ public class AdminBaseDatos {
         }else{
             tmpTrato =0;
         }
-        System.out.println(tmpTrato);
         try{
-            System.out.println(cliente.toString());
                 prepStmt = conn.prepareStatement("update cliente set diasVencimiento = ?, nombreCliente = ?, "
                         + "primerApellido = ?, segundoApellido = ?, cedula = ?, telefono = ?, direccion = ?, email = ?,"
                         + "fechaIngreso = ?, fechaPago = ?, fechaSigPago = ?, morosidades = ?, comentarios = ?, tratoEspecial = '"+tmpTrato+"'"

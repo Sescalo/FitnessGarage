@@ -59,9 +59,9 @@ public class FrmClientes extends javax.swing.JFrame {
 
             @Override
             public void windowClosed(WindowEvent e) {
-                DefaultTableModel tmpModelo = (DefaultTableModel) tblClientes.getModel();
-                tmpModelo.setRowCount(0);
-                setTablaCliente(conexion.getClientes());
+//                DefaultTableModel tmpModelo = (DefaultTableModel) tblClientes.getModel();
+//                tmpModelo.setRowCount(0);
+//                setTablaCliente(conexion.getClientes());
                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
@@ -129,9 +129,11 @@ public class FrmClientes extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
+        btnAdminCliente = new javax.swing.JButton();
+        btnTablaOriginal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 388));
+        setPreferredSize(new java.awt.Dimension(800, 480));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 153, 0));
@@ -187,6 +189,20 @@ public class FrmClientes extends javax.swing.JFrame {
             }
         });
 
+        btnAdminCliente.setText("Administrar Clientes");
+        btnAdminCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminClienteActionPerformed(evt);
+            }
+        });
+
+        btnTablaOriginal.setText("Ver Tabla Original");
+        btnTablaOriginal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTablaOriginalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -200,10 +216,13 @@ public class FrmClientes extends javax.swing.JFrame {
                         .addComponent(btnBuscar)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 656, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnAdminCliente)
+                                .addGap(39, 39, 39)
+                                .addComponent(btnTablaOriginal)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(15, 15, 15))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -223,7 +242,10 @@ public class FrmClientes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(btnAdminCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnTablaOriginal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -233,8 +255,8 @@ public class FrmClientes extends javax.swing.JFrame {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        modelo.setRowCount(0);
-        this.setTablaCliente(conexion.getClientes());
+//        modelo.setRowCount(0);
+//        this.setTablaCliente(conexion.getClientes());
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -248,12 +270,25 @@ public class FrmClientes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void btnTablaOriginalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTablaOriginalActionPerformed
+        // TODO add your handling code here:
+        modelo.setRowCount(0);
+        this.setTablaCliente(conexion.getClientes());
+    }//GEN-LAST:event_btnTablaOriginalActionPerformed
+
+    private void btnAdminClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminClienteActionPerformed
+        // TODO add your handling code here:
+        this.frmMenu.getFrmAdminCliente().setVisible(true);
+    }//GEN-LAST:event_btnAdminClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdminCliente;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnTablaOriginal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblClientes;
