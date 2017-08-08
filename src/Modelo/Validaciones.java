@@ -113,7 +113,7 @@ public class Validaciones {
         else if(mesPago-mes==0 && anoPago-ano==0){
             return dia >= diaAntPago;
         } 
-        else if (mesPago-mes<0 && anoPago-ano<0) {
+        else if (mesPago-mes<0 && anoPago-ano<=0) {
             return true;
         } 
         else if(mesPago-mes>0 && anoPago-ano>=0){

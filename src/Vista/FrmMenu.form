@@ -79,13 +79,9 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-<<<<<<< HEAD
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[902, 540]"/>
     </Property>
-=======
-    <Property name="resizable" type="boolean" value="false"/>
->>>>>>> f3c1a93f56d629f4f4209ba385944f1ed4bc7dec
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>

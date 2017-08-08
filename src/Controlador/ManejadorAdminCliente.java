@@ -68,14 +68,18 @@ public class ManejadorAdminCliente implements ActionListener {
             Cliente tmp = new Cliente();
             if(cliente != null){
                 tmp = conexion.buscarCliente(cliente.getNombreCliente(), cliente.getPrimerApellido());
-                int id = tmp.getIdCliente();
-                cliente.setIdCliente(id);
-                if(validaciones.validarNombres(cliente.getNombreCliente(), cliente.getPrimerApellido(), cliente.getSegundoApellido()) 
-                        && validaciones.validarFecha(cliente.getFechaIngreso()) && validaciones.validarFecha(cliente.getFechaPago())){
-                    conexion.modificarCliente(cliente);
-                    JOptionPane.showMessageDialog(frmAdminCliente, "Cliente modificado correctamente.");
+                if(tmp == null){
+                    JOptionPane.showMessageDialog(frmAdminCliente, "El cliente no existe.");
                 } else {
-                    JOptionPane.showMessageDialog(frmAdminCliente, "Error en los campos de nombre y fecha.");
+                    int id = tmp.getIdCliente();
+                    cliente.setIdCliente(id);
+                    if(validaciones.validarNombres(cliente.getNombreCliente(), cliente.getPrimerApellido(), cliente.getSegundoApellido()) 
+                            && validaciones.validarFecha(cliente.getFechaIngreso()) && validaciones.validarFecha(cliente.getFechaPago())){
+                        conexion.modificarCliente(cliente);
+                        JOptionPane.showMessageDialog(frmAdminCliente, "Cliente modificado correctamente.");
+                    } else {
+                        JOptionPane.showMessageDialog(frmAdminCliente, "Error en los campos de nombre y fecha.");
+                    }
                 }
             } else {
                 JOptionPane.showMessageDialog(frmAdminCliente, "Ingrese los datos correctamente.");

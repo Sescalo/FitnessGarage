@@ -43,7 +43,7 @@ public class FrmClientes extends javax.swing.JFrame {
 //        header.setBackground(Color.red);
         
         this.modelo = (DefaultTableModel) tblClientes.getModel();
-        tblClientes.setDefaultRenderer(Object.class, new MyCellRenderer());
+        tblClientes.setDefaultRenderer(Object.class, new MyCellRenderer(frmMenu));
         //modelo.setRowColor(0, Color.RED);
         this.addWindowListener(new WindowListener() {
             @Override
@@ -235,7 +235,7 @@ public class FrmClientes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))

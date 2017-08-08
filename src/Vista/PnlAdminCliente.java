@@ -6,8 +6,10 @@
 package Vista;
 
 import Modelo.Cliente;
+import Modelo.Validaciones;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
@@ -21,9 +23,13 @@ public class PnlAdminCliente extends javax.swing.JPanel {
     /**
      * Creates new form PnlClientes
      */
+    
+    private Validaciones validaciones;
+    
     public PnlAdminCliente() {
         initComponents();
         this.btnEliminar.setEnabled(false);
+        this.validaciones = new Validaciones();
     }
     
     public void escuchar(ActionListener manejador){
@@ -52,7 +58,11 @@ public class PnlAdminCliente extends javax.swing.JPanel {
     
 
     public int getTxtDiasRestantes() {
-        return Integer.valueOf(txtDiasRestantes.getText());
+        if(txtDiasRestantes.getText().equalsIgnoreCase("") || !validaciones.validarNumeros(txtDiasRestantes.getText())){
+            return 0;
+        } else {
+            return Integer.valueOf(txtDiasRestantes.getText());
+        }
     }
 
     public void setTxtDiasRestantes(int txtDiasRestantes) {
@@ -157,6 +167,10 @@ public class PnlAdminCliente extends javax.swing.JPanel {
 
     public void setBtnModificar(JButton btnModificar) {
         this.btnModificar = btnModificar;
+    }
+
+    public void setChboxTratoEspecial(boolean chboxTratoEspecial) {
+        this.chboxTratoEspecial.setSelected(chboxTratoEspecial);
     }
     
 
@@ -269,7 +283,7 @@ public class PnlAdminCliente extends javax.swing.JPanel {
         btnModificar.setText("Modificar");
         btnModificar.setEnabled(false);
 
-        btnMostrar.setText("Mostrar");
+        btnMostrar.setText("Buscar");
 
         btnEliminar.setText("Eliminar");
 
