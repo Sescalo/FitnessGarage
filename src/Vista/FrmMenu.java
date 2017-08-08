@@ -6,6 +6,7 @@
 package Vista;
 
 import Modelo.AdminBaseDatos;
+import Modelo.AtributosCliente;
 import Modelo.Validaciones;
 import java.awt.Image;
 import java.sql.SQLException;
@@ -38,10 +39,6 @@ public class FrmMenu extends javax.swing.JFrame {
         this.frmAdminCliente = new FrmAdminCliente(conexion, this);
         this.frmAdminUsuario = new FrmAdminUsuario(conexion, this);
         this.frmCliente = new FrmClientes(conexion, this);
-        Validaciones validaciones = new Validaciones();
-        System.out.println(validaciones.calcularDiaAntes("12/07/2017"));
-        
-        
     }
     
     public void deshabilitarComponentes() {

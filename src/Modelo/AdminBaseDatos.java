@@ -317,12 +317,12 @@ public class AdminBaseDatos {
     }
     
     // Metodo que captura todos los clientes de la base de datos
-    public ArrayList<Cliente> getClientesBusqueda(String nombreCliente){
+    public ArrayList<Cliente> getClientesBusqueda(String dato, String atributo){
         ArrayList<Cliente> listaClientes = new ArrayList<>();
 
         try{
             stmt = conn.createStatement();
-            resultado = stmt.executeQuery("SELECT * FROM cliente WHERE nombreCliente LIKE \"%" + nombreCliente + "%\" ;");
+            resultado = stmt.executeQuery("SELECT * FROM cliente WHERE "+ atributo +" LIKE \"%" + dato + "%\" ;");
 
             while(resultado.next()){
                 listaClientes.add(new Cliente(resultado.getInt("idCliente"), resultado.getInt("diasVencimiento"), 
@@ -338,7 +338,7 @@ public class AdminBaseDatos {
         catch(Exception e){
             System.err.println("Error al extraer clientes: "+e);
         }
-        System.out.println("Clientes extraidos de la BD");
+        System.out.println("Clientes buscados extraidos de la BD");
         return listaClientes;
     }
     

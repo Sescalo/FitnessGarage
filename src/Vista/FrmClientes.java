@@ -6,6 +6,7 @@
 package Vista;
 
 import Modelo.AdminBaseDatos;
+import Modelo.AtributosCliente;
 import Modelo.Cliente;
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -13,6 +14,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -44,6 +47,8 @@ public class FrmClientes extends javax.swing.JFrame {
 //        header.setBackground(Color.red);
         
         this.modelo = (DefaultTableModel) tblClientes.getModel();
+        
+        comboBox.setModel(new DefaultComboBoxModel(AtributosCliente.values()));
         
         JTextField tf = new JTextField();
         tf.setEditable(false);
@@ -118,6 +123,10 @@ public class FrmClientes extends javax.swing.JFrame {
     public void setTxtBuscar(String txtBuscar) {
         this.txtBuscar.setText(txtBuscar);
     }
+
+    public JComboBox<String> getComboBox() {
+        return comboBox;
+    }
     
     
     
@@ -138,6 +147,7 @@ public class FrmClientes extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         btnAdminCliente = new javax.swing.JButton();
         btnTablaOriginal = new javax.swing.JButton();
+        comboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 480));
@@ -219,7 +229,9 @@ public class FrmClientes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
+                        .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnBuscar)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -242,10 +254,12 @@ public class FrmClientes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(24, 24, 24)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(comboBox, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -269,11 +283,16 @@ public class FrmClientes extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         if(!this.txtBuscar.getText().equalsIgnoreCase("")){
-            ArrayList<Cliente> clientesBusqueda = conexion.getClientesBusqueda(this.txtBuscar.getText());
-            this.modelo.setRowCount(0);
-            this.setTablaCliente(clientesBusqueda);
+            AtributosCliente ac = (AtributosCliente)comboBox.getSelectedItem();
+            ArrayList<Cliente> clientesBusqueda = conexion.getClientesBusqueda(this.txtBuscar.getText(), ac.name());
+            if(clientesBusqueda.isEmpty()){
+                JOptionPane.showMessageDialog(this, "No hay resultados que concuerden con su búsqueda.");
+            } else {
+                this.modelo.setRowCount(0);
+                this.setTablaCliente(clientesBusqueda);
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "El campo de texto de buscar esta vacio.");
+            JOptionPane.showMessageDialog(this, "El campo de texto de buscar esta vacío.");
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -296,6 +315,7 @@ public class FrmClientes extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnTablaOriginal;
+    private javax.swing.JComboBox<String> comboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblClientes;
