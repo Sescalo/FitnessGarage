@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -43,6 +44,12 @@ public class FrmClientes extends javax.swing.JFrame {
 //        header.setBackground(Color.red);
         
         this.modelo = (DefaultTableModel) tblClientes.getModel();
+        
+        JTextField tf = new JTextField();
+        tf.setEditable(false);
+        DefaultCellEditor editor = new DefaultCellEditor( tf );
+        tblClientes.setDefaultEditor(Object.class, editor);
+        
         tblClientes.setDefaultRenderer(Object.class, new MyCellRenderer(frmMenu));
         //modelo.setRowColor(0, Color.RED);
         this.addWindowListener(new WindowListener() {
