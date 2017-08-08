@@ -73,7 +73,7 @@ public class Validaciones {
         return dia+"/"+mes+"/"+ano;
     }
     
-    public boolean calcularDiaAntes(String fechaPago){
+    public boolean calcularMorosos(String fechaPago){
         
         String fechaActual = generarFechaActual();
         int dia = Integer.valueOf(fechaActual.substring(0, 2));
@@ -111,7 +111,7 @@ public class Validaciones {
             return true;
         }
         else if(mesPago-mes==0 && anoPago-ano==0){
-            return dia >= diaAntPago;
+            return dia > diaPago;
         } 
         else if (mesPago-mes<0 && anoPago-ano<=0) {
             return true;
@@ -122,6 +122,41 @@ public class Validaciones {
         else {
             return false;
         }
+    }
+    
+        public boolean calcularMorosidadPronta(String fechaPago){
+        
+        String fechaActual = generarFechaActual();
+        int dia = Integer.valueOf(fechaActual.substring(0, 2));
+        int mes = Integer.valueOf(fechaActual.substring(3, 5));
+        int ano = Integer.valueOf(fechaActual.substring(6, 10));
+        
+        //String fechaPago = cliente.getFechaPago();
+        int diaPago = Integer.valueOf(fechaPago.substring(0, 2));
+        int mesPago = Integer.valueOf(fechaPago.substring(3, 5));
+        int anoPago = Integer.valueOf(fechaPago.substring(6, 10));
+        int diaAntPago;
+        boolean isLeapYear;
+        if(diaPago == 1 && (mesPago == 1 || mesPago == 3 || mesPago == 5 || mesPago == 7 || mesPago == 8 || mesPago == 10 || mesPago == 12)){
+            diaAntPago = 31;
+        } 
+        else if(diaPago == 1 && (mesPago == 4 || mesPago == 6 || mesPago == 7 || mesPago == 9 || mesPago == 11)){
+            diaAntPago = 30;
+        }
+        else if(diaPago == 1  && mesPago == 2){
+            isLeapYear = ((anoPago % 4 == 0) && (anoPago % 100 != 0) || (anoPago % 400 == 0));
+            if (isLeapYear){
+                diaAntPago = 30;
+            } else {
+                diaAntPago = 29;
+            }
+        }
+        else {
+            diaAntPago = diaPago-1;
+        }
+//        int tmp;
+//        if(diaAntPago == 30 || diaAntPago == 31)
+        return (diaAntPago == dia || diaPago == dia) && mesPago == mes && anoPago == ano;
     }
     
     public boolean validarDatosUsuario(Usuario usuario){

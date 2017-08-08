@@ -32,10 +32,14 @@ public class MyCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
             Object seleccionado = table.getValueAt(row, 14);
             String sval = fechaPago.toString();
             Validaciones validaciones = new Validaciones();
-            boolean unDia = validaciones.calcularDiaAntes(sval);
+            boolean moroso = validaciones.calcularMorosos(sval);
             String sseleccionado = seleccionado.toString();
             boolean esSeleccionado = Boolean.valueOf(sseleccionado);
-            if (unDia) {
+            if (validaciones.calcularMorosidadPronta(sval)){
+                cellComponent.setForeground(Color.black);
+                cellComponent.setBackground(Color.yellow);
+            }
+            else if (moroso) {
                 cellComponent.setForeground(Color.black);
                 cellComponent.setBackground(Color.red);
 
@@ -52,6 +56,7 @@ public class MyCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
                 cellComponent.setForeground(table.getSelectionForeground());
                 cellComponent.setBackground(table.getSelectionBackground());
                 
+                pnlAdminCliente.setTxtIdCliente(Integer.valueOf((table.getValueAt(row, 0).toString())));
                 pnlAdminCliente.setTxtDiasRestantes(Integer.valueOf((table.getValueAt(row, 1).toString())));
                 pnlAdminCliente.setTxtNombre(table.getValueAt(row, 2).toString());
                 pnlAdminCliente.setTxtPrimApellido(table.getValueAt(row, 3).toString());

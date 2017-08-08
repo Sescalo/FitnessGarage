@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 /**
@@ -172,6 +173,14 @@ public class PnlAdminCliente extends javax.swing.JPanel {
     public void setChboxTratoEspecial(boolean chboxTratoEspecial) {
         this.chboxTratoEspecial.setSelected(chboxTratoEspecial);
     }
+
+    public int getTxtIdCliente() {
+        return Integer.valueOf(txtIdCliente.getText());
+    }
+
+    public void setTxtIdCliente(int txtIdCliente) {
+        this.txtIdCliente.setText(String.valueOf(txtIdCliente));
+    }
     
 
     public void mostrarInfoCliente(Cliente cliente){
@@ -250,6 +259,8 @@ public class PnlAdminCliente extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        idClientelbl = new javax.swing.JLabel();
+        txtIdCliente = new javax.swing.JTextField();
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Teléfono:");
@@ -308,6 +319,11 @@ public class PnlAdminCliente extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Cédula:");
 
+        idClientelbl.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        idClientelbl.setText("ID Cliente:");
+
+        txtIdCliente.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -332,7 +348,8 @@ public class PnlAdminCliente extends javax.swing.JPanel {
                                 .addComponent(jLabel13)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(chboxTratoEspecial)
-                                    .addComponent(jLabel12)))
+                                    .addComponent(jLabel12))
+                                .addComponent(idClientelbl))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel15)
                                 .addGap(125, 125, 125)))
@@ -349,10 +366,11 @@ public class PnlAdminCliente extends javax.swing.JPanel {
                                 .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                                 .addComponent(txtFechaIngreso, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                                 .addComponent(txtFechaPago, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-                                .addComponent(txtFechaProxPago, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
+                                .addComponent(txtFechaProxPago, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                                .addComponent(txtIdCliente, javax.swing.GroupLayout.Alignment.LEADING))
                             .addComponent(txtAComentario, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(18, Short.MAX_VALUE))
+                        .addContainerGap(20, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(btnIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -375,7 +393,11 @@ public class PnlAdminCliente extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(57, 57, 57)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(idClientelbl)
+                    .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addGroup(layout.createSequentialGroup()
@@ -455,6 +477,7 @@ public class PnlAdminCliente extends javax.swing.JPanel {
     private javax.swing.JButton btnMostrar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JCheckBox chboxTratoEspecial;
+    private javax.swing.JLabel idClientelbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -478,6 +501,7 @@ public class PnlAdminCliente extends javax.swing.JPanel {
     private javax.swing.JTextField txtFechaIngreso;
     private javax.swing.JTextField txtFechaPago;
     private javax.swing.JTextField txtFechaProxPago;
+    private javax.swing.JTextField txtIdCliente;
     private javax.swing.JTextField txtMorosidades;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrimApellido;

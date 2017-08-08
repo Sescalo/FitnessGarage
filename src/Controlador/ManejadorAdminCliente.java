@@ -37,7 +37,7 @@ public class ManejadorAdminCliente implements ActionListener {
                 panel.getTxtCedula().equalsIgnoreCase("") || panel.getTxtFechaIngreso().equalsIgnoreCase("") || panel.getTxtFechaPago().equalsIgnoreCase("")){
             return null;
         } else {
-            return new Cliente(panel.getTxtDiasRestantes(), panel.getTxtNombre(), panel.getTxtPrimApellido(), panel.getTxtSegApellido(),
+            return new Cliente(panel.getTxtIdCliente(), panel.getTxtDiasRestantes(), panel.getTxtNombre(), panel.getTxtPrimApellido(), panel.getTxtSegApellido(),
             panel.getTxtCedula(), panel.getTxtTelefono(), panel.getTxtDireccion(), panel.getTxtEmail(), panel.getTxtFechaIngreso(), 
             panel.getTxtFechaPago(), panel.getTxtFechaProxPago(), panel.getTxtMorosidades(), panel.getTxtAComentario(), panel.getCboxTratoEspecial(), false);
         }
@@ -56,6 +56,7 @@ public class ManejadorAdminCliente implements ActionListener {
                         && validaciones.validarFecha(cliente.getFechaIngreso()) && validaciones.validarFecha(cliente.getFechaPago())){
                     conexion.agregarCliente(cliente);
                     JOptionPane.showMessageDialog(frmAdminCliente, "Cliente agregado correctamente.");
+                    frmAdminCliente.getPnlAdminCliente1().limpiar();
                 } else {
                     JOptionPane.showMessageDialog(frmAdminCliente, "Error en los campos de nombre y fecha.");
                 }
@@ -65,28 +66,21 @@ public class ManejadorAdminCliente implements ActionListener {
         }
         if(ae.getActionCommand().equalsIgnoreCase("Modificar")){
             Cliente cliente = clienteVacio();
-            Cliente tmp = new Cliente();
             if(cliente != null){
-                tmp = conexion.buscarCliente(cliente.getNombreCliente(), cliente.getPrimerApellido());
-                if(tmp == null){
-                    JOptionPane.showMessageDialog(frmAdminCliente, "El cliente no existe.");
-                } else {
-                    int id = tmp.getIdCliente();
-                    cliente.setIdCliente(id);
                     if(validaciones.validarNombres(cliente.getNombreCliente(), cliente.getPrimerApellido(), cliente.getSegundoApellido()) 
                             && validaciones.validarFecha(cliente.getFechaIngreso()) && validaciones.validarFecha(cliente.getFechaPago())){
-                        conexion.modificarCliente(cliente);
-                        JOptionPane.showMessageDialog(frmAdminCliente, "Cliente modificado correctamente.");
+                        if(JOptionPane.showConfirmDialog(frmAdminCliente, "¿Está seguro de modificar este cliente?") == 0){
+                            conexion.modificarCliente(cliente);
+                            JOptionPane.showMessageDialog(frmAdminCliente, "Cliente modificado correctamente.");
+                        }
                     } else {
                         JOptionPane.showMessageDialog(frmAdminCliente, "Error en los campos de nombre y fecha.");
                     }
-                }
             } else {
                 JOptionPane.showMessageDialog(frmAdminCliente, "Ingrese los datos correctamente.");
             }
-            
         }
-        if(ae.getActionCommand().equalsIgnoreCase("Mostrar")){
+        if(ae.getActionCommand().equalsIgnoreCase("Buscar")){
             String nombre = frmAdminCliente.getPnlAdminCliente1().getTxtNombre();
             String primerApellido = frmAdminCliente.getPnlAdminCliente1().getTxtPrimApellido();
             if(!nombre.equalsIgnoreCase("") && !primerApellido.equalsIgnoreCase("")){

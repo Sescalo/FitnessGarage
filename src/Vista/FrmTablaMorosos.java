@@ -49,7 +49,7 @@ public class FrmTablaMorosos extends javax.swing.JFrame {
     public void setTablaMorosos(ArrayList<Cliente> clientes){
         DefaultTableModel modelo = (DefaultTableModel) this.tblMorosos.getModel();
        for(Cliente cliente: clientes){
-           if(validaciones.calcularDiaAntes(cliente.getFechaPago())){
+           if(validaciones.calcularMorosos(cliente.getFechaPago()) || validaciones.calcularMorosidadPronta(cliente.getFechaPago())){
                 Object[] tmp={cliente.getIdCliente(),cliente.getDiasVencimiento(),cliente.getNombreCliente(),cliente.getPrimerApellido(),cliente.getSegundoApellido(),
                 cliente.getCedula(),cliente.getTelefono(),cliente.getDireccion(),cliente.getEmail(),cliente.getFechaIngreso(),
                 cliente.getFechaPago(),cliente.getFechaSigPago(),cliente.getMorosidades(),cliente.getComentarios(),cliente.isTratoEspecial()};
