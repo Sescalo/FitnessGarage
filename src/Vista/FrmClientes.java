@@ -108,8 +108,13 @@ public class FrmClientes extends javax.swing.JFrame {
     
     public void setTablaCliente(ArrayList<Cliente> clientes){
        DefaultTableModel modelo = (DefaultTableModel) this.tblClientes.getModel();
+       String ast;
        for(Cliente cliente: clientes){
-            Object[] tmp={cliente.getIdCliente(),cliente.getDiasVencimiento(),cliente.getNombreCliente(),cliente.getPrimerApellido(),cliente.getSegundoApellido(),
+           ast="";
+           if(!cliente.getMorosidades().equalsIgnoreCase("")){
+               ast = "*";
+           }
+            Object[] tmp={cliente.getIdCliente(),cliente.getDiasVencimiento(),cliente.getNombreCliente()+ast,cliente.getPrimerApellido(),cliente.getSegundoApellido(),
             cliente.getCedula(),cliente.getTelefono(),cliente.getDireccion(),cliente.getEmail(),cliente.getFechaIngreso(),
             cliente.getFechaPago(),cliente.getFechaSigPago(),cliente.getMorosidades(),cliente.getComentarios(),cliente.isTratoEspecial()};
             modelo.addRow(tmp);

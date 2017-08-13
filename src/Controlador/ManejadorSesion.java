@@ -46,7 +46,9 @@ public class ManejadorSesion implements ActionListener{
                     frmSesion.dispose();
                     frmSesion.setTxtSesionUsuario("");
                     frmSesion.setTxtContrasena("");
-                    frmMorosos.setVisible(true);
+                    if(!frmMorosos.getMorosos().isEmpty()){
+                        frmMorosos.setVisible(true);
+                    }
                     if(!nombreUsuario.equalsIgnoreCase("scampos")){
                         frmSesion.getFrmMenu().getFrmAdminUsuario().getBtnEliminar().setEnabled(false);
                         frmSesion.getFrmMenu().getFrmAdminUsuario().getJTextContra().setVisible(false);

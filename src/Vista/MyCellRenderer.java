@@ -55,10 +55,13 @@ public class MyCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
             if (isSelected) {
                 cellComponent.setForeground(table.getSelectionForeground());
                 cellComponent.setBackground(table.getSelectionBackground());
-                
+                String tmp = table.getValueAt(row, 2).toString();
+                if(!table.getValueAt(row, 12).toString().equalsIgnoreCase("")){
+                    tmp = tmp.substring(0, tmp.length()-1);
+                }
                 pnlAdminCliente.setTxtIdCliente(Integer.valueOf((table.getValueAt(row, 0).toString())));
                 pnlAdminCliente.setTxtDiasRestantes(Integer.valueOf((table.getValueAt(row, 1).toString())));
-                pnlAdminCliente.setTxtNombre(table.getValueAt(row, 2).toString());
+                pnlAdminCliente.setTxtNombre(tmp);
                 pnlAdminCliente.setTxtPrimApellido(table.getValueAt(row, 3).toString());
                 pnlAdminCliente.setTxtSegApellido(table.getValueAt(row, 4).toString());
                 pnlAdminCliente.setTxtCedula(table.getValueAt(row, 5).toString());

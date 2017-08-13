@@ -28,6 +28,7 @@ public class FrmMenu extends javax.swing.JFrame {
     private FrmClientes frmCliente;
     private FrmTablaMorosos frmMorosos;
     private AdminBaseDatos conexion;
+    private FrmHistorial frmHistorial;
     
     public FrmMenu() throws ClassNotFoundException, SQLException {
         initComponents();
@@ -39,6 +40,7 @@ public class FrmMenu extends javax.swing.JFrame {
         this.frmAdminCliente = new FrmAdminCliente(conexion, this);
         this.frmAdminUsuario = new FrmAdminUsuario(conexion, this);
         this.frmCliente = new FrmClientes(conexion, this);
+        this.frmHistorial = new FrmHistorial(this);
     }
     
     public void deshabilitarComponentes() {
@@ -100,6 +102,14 @@ public class FrmMenu extends javax.swing.JFrame {
         this.frmMorosos = frmMorosos;
     }
     
+    public FrmHistorial getFrmHistorial(){
+      return frmHistorial;
+}
+    
+    public void setFrmHistorial(FrmHistorial frmHistorial){
+        this.frmHistorial= frmHistorial;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -122,6 +132,7 @@ public class FrmMenu extends javax.swing.JFrame {
         jmiAdminUsuarios = new javax.swing.JMenuItem();
         jmiAdminClientes = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        mniHistorial = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(902, 540));
@@ -192,6 +203,14 @@ public class FrmMenu extends javax.swing.JFrame {
         });
         jmMantenimiento.add(jMenuItem1);
 
+        mniHistorial.setText("Historial");
+        mniHistorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniHistorialActionPerformed(evt);
+            }
+        });
+        jmMantenimiento.add(mniHistorial);
+
         jMenuBar1.add(jmMantenimiento);
 
         setJMenuBar(jMenuBar1);
@@ -243,6 +262,10 @@ public class FrmMenu extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         frmMorosos.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void mniHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniHistorialActionPerformed
+       frmHistorial.setVisible(true);
+    }//GEN-LAST:event_mniHistorialActionPerformed
 
     /**
      * @param args the command line arguments
@@ -298,6 +321,7 @@ public class FrmMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiIniciarSesion;
     private javax.swing.JMenuItem jmiSalir;
     private javax.swing.JMenuItem jmiTblClientes;
+    private javax.swing.JMenuItem mniHistorial;
     private javax.swing.JLabel nombreUsuario;
     // End of variables declaration//GEN-END:variables
 }

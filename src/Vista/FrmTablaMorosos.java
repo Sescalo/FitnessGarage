@@ -25,6 +25,7 @@ public class FrmTablaMorosos extends javax.swing.JFrame {
     private DefaultTableModel modelo;
     private FrmMenu frmMenu;
     private Validaciones validaciones;
+    private ArrayList <Cliente> morosos;
     /**
      * Creates new form FrmTablaMorosos
      */
@@ -33,7 +34,8 @@ public class FrmTablaMorosos extends javax.swing.JFrame {
         this.conexion=conexion;
         this.frmMenu = frmMenu;
         this.validaciones= new Validaciones();
-        this.setTablaMorosos(conexion.getClientes());
+        this.morosos = conexion.getClientes();
+        this.setTablaMorosos(morosos);
         tblMorosos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         JTableHeader header = tblMorosos.getTableHeader();
         header.setBackground(Color.red);
@@ -49,7 +51,7 @@ public class FrmTablaMorosos extends javax.swing.JFrame {
     public void setTablaMorosos(ArrayList<Cliente> clientes){
         DefaultTableModel modelo = (DefaultTableModel) this.tblMorosos.getModel();
        for(Cliente cliente: clientes){
-           if(validaciones.calcularMorosos(cliente.getFechaPago()) || validaciones.calcularMorosidadPronta(cliente.getFechaPago())){
+           if(validaciones.calcularMorosos(cliente.getFechaPago())){
                 Object[] tmp={cliente.getIdCliente(),cliente.getDiasVencimiento(),cliente.getNombreCliente(),cliente.getPrimerApellido(),cliente.getSegundoApellido(),
                 cliente.getCedula(),cliente.getTelefono(),cliente.getDireccion(),cliente.getEmail(),cliente.getFechaIngreso(),
                 cliente.getFechaPago(),cliente.getFechaSigPago(),cliente.getMorosidades(),cliente.getComentarios(),cliente.isTratoEspecial()};
@@ -57,6 +59,14 @@ public class FrmTablaMorosos extends javax.swing.JFrame {
            }
        }
     
+    }
+
+    public ArrayList<Cliente> getMorosos() {
+        return morosos;
+    }
+
+    public void setMorosos(ArrayList<Cliente> morosos) {
+        this.morosos = morosos;
     }
 
     /**
