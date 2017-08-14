@@ -5,8 +5,15 @@
  */
 package Vista;
 
+import Modelo.AdminBaseDatos;
+import Modelo.Historial;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.util.ArrayList;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,11 +24,62 @@ public class FrmHistorial extends javax.swing.JFrame {
 
     private FrmMenu frmMenu;
     private DefaultTableModel modelo;
+    private AdminBaseDatos conexion;
     
-    public FrmHistorial(FrmMenu frmMenu) {
+    public FrmHistorial(AdminBaseDatos conexion, FrmMenu frmMenu) {
         initComponents();
         this.frmMenu = frmMenu;
         this.modelo = (DefaultTableModel)tblHistorial.getModel();
+        this.conexion = conexion;
+        
+        JTextField tf = new JTextField();
+        tf.setEditable(false);
+        DefaultCellEditor editor = new DefaultCellEditor( tf );
+        tblHistorial.setDefaultEditor(Object.class, editor);
+        
+        this.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+//                DefaultTableModel tmpModelo = (DefaultTableModel) tblClientes.getModel();
+//                tmpModelo.setRowCount(0);
+//                setTablaCliente(conexion.getClientes());
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+                DefaultTableModel tmpModelo = (DefaultTableModel) tblHistorial.getModel();
+                tmpModelo.setRowCount(0);
+                setTablaCliente(conexion.getHistorial());
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
     }
     
     public void escuchar(ActionListener manejador){
@@ -44,6 +102,14 @@ public class FrmHistorial extends javax.swing.JFrame {
         this.tblHistorial = tblHistorial;
     }
 
+    public void setTablaCliente(ArrayList<Historial> historial){
+
+       for(Historial histo: historial){
+            Object[] tmp={histo.getId(), histo.getDescripcion()};
+            modelo.addRow(tmp);
+       }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,7 +124,7 @@ public class FrmHistorial extends javax.swing.JFrame {
         tblHistorial = new javax.swing.JTable();
         btnSalir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
@@ -69,15 +135,28 @@ public class FrmHistorial extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Descripción"
+                "ID Historial", "Descripción"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblHistorial);
         if (tblHistorial.getColumnModel().getColumnCount() > 0) {
-            tblHistorial.getColumnModel().getColumn(0).setPreferredWidth(800);
+            tblHistorial.getColumnModel().getColumn(1).setPreferredWidth(800);
         }
 
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,6 +187,11 @@ public class FrmHistorial extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
 
 

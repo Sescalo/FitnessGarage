@@ -69,8 +69,9 @@ public class ManejadorAdminCliente implements ActionListener {
                     conexion.agregarCliente(cliente);
                     JOptionPane.showMessageDialog(frmAdminCliente, "Cliente agregado correctamente.");
                     frmAdminCliente.getPnlAdminCliente1().limpiar();
-                    Object[] tmp = {frmAdminCliente.getFrmMenu().getNombreUsuario()+" ha agregado el cliente "+cliente.getNombreCliente()+" el "+validaciones.generarFechaActual()};
-                    frmAdminCliente.getFrmMenu().getFrmHistorial().getModelo().addRow(tmp);
+//                    Object[] tmp = {frmAdminCliente.getFrmMenu().getNombreUsuario()+" ha agregado el cliente "+cliente.getNombreCliente()+" el "+validaciones.generarFechaActual()};
+//                    frmAdminCliente.getFrmMenu().getFrmHistorial().getModelo().addRow(tmp);
+                    conexion.agregarAHistorial(frmAdminCliente.getFrmMenu().getNombreUsuario()+" ha agregado el cliente "+cliente.getNombreCliente()+" el "+validaciones.generarFechaActual());
                 } else {
                     JOptionPane.showMessageDialog(frmAdminCliente, "Error en los campos de nombre y fecha.");
                 }
@@ -86,8 +87,9 @@ public class ManejadorAdminCliente implements ActionListener {
                         if(JOptionPane.showConfirmDialog(frmAdminCliente, "¿Está seguro de modificar este cliente?") == 0){
                             conexion.modificarCliente(cliente);
                             JOptionPane.showMessageDialog(frmAdminCliente, "Cliente modificado correctamente.");
-                            Object[] tmp = {frmAdminCliente.getFrmMenu().getNombreUsuario()+" ha modificado el cliente "+cliente.getNombreCliente()+" el "+validaciones.generarFechaActual()};
-                            frmAdminCliente.getFrmMenu().getFrmHistorial().getModelo().addRow(tmp);
+//                            Object[] tmp = {frmAdminCliente.getFrmMenu().getNombreUsuario()+" ha modificado el cliente "+cliente.getNombreCliente()+" el "+validaciones.generarFechaActual()};
+//                            frmAdminCliente.getFrmMenu().getFrmHistorial().getModelo().addRow(tmp);
+                            conexion.agregarAHistorial(frmAdminCliente.getFrmMenu().getNombreUsuario()+" ha modificado el cliente "+cliente.getNombreCliente()+" el "+validaciones.generarFechaActual());
                         }
                     } else {
                         JOptionPane.showMessageDialog(frmAdminCliente, "Error en los campos de nombre y fecha.");

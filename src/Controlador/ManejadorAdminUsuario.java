@@ -89,6 +89,7 @@ public class ManejadorAdminUsuario implements ActionListener{
                 if(validarDatosUsuario(usuario) && usuario.getIdUsuario() != 1){
                     conexion.modificarUsuario(usuario);
                     JOptionPane.showMessageDialog(frmAdminUsuario, "Usuario modificado correctamente.");
+                    frmAdminUsuario.configurar();
                 }
             } else {
                 JOptionPane.showMessageDialog(frmAdminUsuario, "Ingrese los datos correctamente.");
@@ -101,8 +102,11 @@ public class ManejadorAdminUsuario implements ActionListener{
                 usuario = conexion.buscarUsuario(nombre, primerApellido);
                 if (usuario != null){
                     frmAdminUsuario.mostrarInfoUsuario(usuario);
+                    frmAdminUsuario.getFieldContrasena().setVisible(false);
                     frmAdminUsuario.getBtnModificar().setEnabled(true);
-                    frmAdminUsuario.getBtnEliminar().setEnabled(true);
+                    if(frmAdminUsuario.getFrmMenu().getNombreUsuario().equalsIgnoreCase("scampos")){
+                        frmAdminUsuario.getBtnEliminar().setEnabled(true);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(frmAdminUsuario, "El usuario no existe.");
                 }
@@ -114,6 +118,7 @@ public class ManejadorAdminUsuario implements ActionListener{
             if(JOptionPane.showConfirmDialog(frmAdminUsuario, "¿Está seguro de eliminar este usuario?") == 0 && frmAdminUsuario.getTxtIdUsuario() != 1){
                 conexion.eliminarUsuario(frmAdminUsuario.getTxtIdUsuario());
                 JOptionPane.showMessageDialog(frmAdminUsuario, "Usuario eliminado correctamente.");
+                frmAdminUsuario.configurar();
             } else {
                 JOptionPane.showMessageDialog(frmAdminUsuario, "No se realizaron modificaciones.");
             }

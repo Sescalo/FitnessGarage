@@ -11,7 +11,9 @@ import Modelo.Validaciones;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
@@ -35,6 +37,12 @@ public class FrmTablaMorosos extends javax.swing.JFrame {
         this.frmMenu = frmMenu;
         this.validaciones= new Validaciones();
         this.morosos = conexion.getClientes();
+        
+        JTextField tf = new JTextField();
+        tf.setEditable(false);
+        DefaultCellEditor editor = new DefaultCellEditor( tf );
+        tblMorosos.setDefaultEditor(Object.class, editor);
+        
         this.setTablaMorosos(morosos);
         tblMorosos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         JTableHeader header = tblMorosos.getTableHeader();

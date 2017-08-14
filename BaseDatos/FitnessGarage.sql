@@ -23,38 +23,51 @@ USE `fitnessgarage` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `fitnessgarage`.`cliente` (
   `idCliente` INT(11) NOT NULL AUTO_INCREMENT,
-  `diasVencimiento` INT(11) NULL,
-  `nombreCliente` VARCHAR(45) NULL,
-  `primerApellido` VARCHAR(45) NULL,
-  `segundoApellido` VARCHAR(45) NULL,
-  `cedula` VARCHAR(45) NULL,
-  `telefono` VARCHAR(45) NULL,
-  `direccion` VARCHAR(150) NULL,
-  `email` VARCHAR(45) NULL,
-  `fechaIngreso` VARCHAR(45) NULL,
-  `fechaPago` VARCHAR(45) NULL,
-  `fechaSigPago` VARCHAR(45) NULL,
-  `morosidades` VARCHAR(200) NULL,
-  `comentarios` VARCHAR(300) NULL,
-  `tratoEspecial` TINYINT NULL,
-  `eliminado` TINYINT NULL DEFAULT 0,
+  `diasVencimiento` INT(11) NULL DEFAULT NULL,
+  `nombreCliente` VARCHAR(45) NULL DEFAULT NULL,
+  `primerApellido` VARCHAR(45) NULL DEFAULT NULL,
+  `segundoApellido` VARCHAR(45) NULL DEFAULT NULL,
+  `cedula` VARCHAR(45) NULL DEFAULT NULL,
+  `telefono` VARCHAR(45) NULL DEFAULT NULL,
+  `direccion` VARCHAR(150) NULL DEFAULT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `fechaIngreso` VARCHAR(45) NULL DEFAULT NULL,
+  `fechaPago` VARCHAR(45) NULL DEFAULT NULL,
+  `fechaSigPago` VARCHAR(45) NULL DEFAULT NULL,
+  `morosidades` VARCHAR(200) NULL DEFAULT NULL,
+  `comentarios` VARCHAR(300) NULL DEFAULT NULL,
+  `tratoEspecial` TINYINT(4) NULL DEFAULT NULL,
+  `eliminado` TINYINT(4) NULL DEFAULT '0',
   PRIMARY KEY (`idCliente`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 2012
 DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `fitnessgarage`.`Usuario`
+-- Table `fitnessgarage`.`usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fitnessgarage`.`Usuario` (
-  `idUsuario` INT NOT NULL AUTO_INCREMENT,
-  `nombreUsuario` VARCHAR(45) NULL,
+CREATE TABLE IF NOT EXISTS `fitnessgarage`.`usuario` (
+  `idUsuario` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombreUsuario` VARCHAR(45) NULL DEFAULT NULL,
   `contrasena` VARCHAR(45) NOT NULL,
-  `nombre` VARCHAR(45) NULL,
-  `primerApellido` VARCHAR(45) NULL,
-  `segundoApellido` VARCHAR(45) NULL,
-  `eliminado` TINYINT NULL DEFAULT 0,
+  `nombre` VARCHAR(45) NULL DEFAULT NULL,
+  `primerApellido` VARCHAR(45) NULL DEFAULT NULL,
+  `segundoApellido` VARCHAR(45) NULL DEFAULT NULL,
+  `eliminado` TINYINT(4) NULL DEFAULT '0',
   PRIMARY KEY (`idUsuario`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `fitnessgarage`.`Historial`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `fitnessgarage`.`Historial` (
+  `idHistorial` INT NOT NULL AUTO_INCREMENT,
+  `descripcion` VARCHAR(300) NOT NULL,
+  PRIMARY KEY (`idHistorial`))
 ENGINE = InnoDB;
 
 

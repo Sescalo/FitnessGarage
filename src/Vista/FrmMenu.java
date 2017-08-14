@@ -40,7 +40,7 @@ public class FrmMenu extends javax.swing.JFrame {
         this.frmAdminCliente = new FrmAdminCliente(conexion, this);
         this.frmAdminUsuario = new FrmAdminUsuario(conexion, this);
         this.frmCliente = new FrmClientes(conexion, this);
-        this.frmHistorial = new FrmHistorial(this);
+        this.frmHistorial = new FrmHistorial(conexion, this);
     }
     
     public void deshabilitarComponentes() {

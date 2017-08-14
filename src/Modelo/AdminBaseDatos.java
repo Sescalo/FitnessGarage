@@ -342,4 +342,42 @@ public class AdminBaseDatos {
         return listaClientes;
     }
     
+    public void agregarAHistorial(String descripcion){
+        try{
+            prepStmt = conn.prepareStatement("insert into Historial (descripcion) VALUES (?);");
+
+            prepStmt.setString(1, descripcion);
+            
+            int res = prepStmt.executeUpdate();
+            if(res>0){
+                System.out.println("Accion de historial guardada");
+            }
+            else{
+                System.out.println("Error al guardar accion de historial");
+            }
+//            conn.close();
+        }
+
+        catch(Exception e){
+            System.out.println("Error al guardar en historial");
+        }
+    }
+    
+    public ArrayList<Historial> getHistorial() {
+        ArrayList<Historial> listaHistorial = new ArrayList<>();
+        try{
+            stmt = conn.createStatement();
+            resultado = stmt.executeQuery("SELECT * FROM historial;");
+
+            while(resultado.next()){
+                listaHistorial.add( new Historial(resultado.getInt("idHistorial"), resultado.getString("descripcion")));
+            }
+        }
+        catch(Exception e){
+
+        }
+        System.out.println("Historial extraido de la BD");
+        return listaHistorial;
+    }
+    
 }
