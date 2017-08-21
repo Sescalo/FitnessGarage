@@ -49,7 +49,7 @@ public class ManejadorSesion implements ActionListener{
                     if(!frmMorosos.getMorosos().isEmpty()){
                         frmMorosos.setVisible(true);
                     }
-                    if(!nombreUsuario.equalsIgnoreCase("scampos")){
+                    if(!nombreUsuario.equalsIgnoreCase("Edu")){
                         frmSesion.getFrmMenu().getFrmAdminUsuario().getBtnEliminar().setEnabled(false);
                         frmSesion.getFrmMenu().getFrmAdminUsuario().getJTextContra().setVisible(false);
                         frmSesion.getFrmMenu().getFrmAdminCliente().getPnlAdminCliente1().getBtnEliminar().setEnabled(false);

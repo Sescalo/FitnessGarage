@@ -104,7 +104,7 @@ public class ManejadorAdminUsuario implements ActionListener{
                     frmAdminUsuario.mostrarInfoUsuario(usuario);
                     frmAdminUsuario.getFieldContrasena().setVisible(false);
                     frmAdminUsuario.getBtnModificar().setEnabled(true);
-                    if(frmAdminUsuario.getFrmMenu().getNombreUsuario().equalsIgnoreCase("scampos")){
+                    if(frmAdminUsuario.getFrmMenu().getNombreUsuario().equalsIgnoreCase("Edu")){
                         frmAdminUsuario.getBtnEliminar().setEnabled(true);
                     }
                 } else {

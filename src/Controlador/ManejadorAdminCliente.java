@@ -13,8 +13,6 @@ import Vista.PnlAdminCliente;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 /**
  *
  * @author Michelt
@@ -98,22 +96,22 @@ public class ManejadorAdminCliente implements ActionListener {
                 JOptionPane.showMessageDialog(frmAdminCliente, "Ingrese los datos correctamente.");
             }
         }
-        if(ae.getActionCommand().equalsIgnoreCase("Buscar")){
-            String nombre = frmAdminCliente.getPnlAdminCliente1().getTxtNombre();
-            String primerApellido = frmAdminCliente.getPnlAdminCliente1().getTxtPrimApellido();
-            if(!nombre.equalsIgnoreCase("") && !primerApellido.equalsIgnoreCase("")){
-                Cliente cliente = conexion.buscarCliente(nombre, primerApellido);
-                if (cliente != null){
-                    frmAdminCliente.getPnlAdminCliente1().mostrarInfoCliente(cliente);
-                    frmAdminCliente.getPnlAdminCliente1().getBtnModificar().setEnabled(true);
-                    frmAdminCliente.getPnlAdminCliente1().getBtnEliminar().setEnabled(true);
-                } else {
-                    JOptionPane.showMessageDialog(frmAdminCliente, "El cliente no existe.");
-                }
-            } else {
-                JOptionPane.showMessageDialog(frmAdminCliente, "Ingrese los datos correctamente.");
-            }
-        }
+//        if(ae.getActionCommand().equalsIgnoreCase("Buscar")){
+//            String nombre = frmAdminCliente.getPnlAdminCliente1().getTxtNombre();
+//            String primerApellido = frmAdminCliente.getPnlAdminCliente1().getTxtPrimApellido();
+//            if(!nombre.equalsIgnoreCase("") && !primerApellido.equalsIgnoreCase("")){
+//                Cliente cliente = conexion.buscarCliente(nombre, primerApellido);
+//                if (cliente != null){
+//                    frmAdminCliente.getPnlAdminCliente1().mostrarInfoCliente(cliente);
+//                    frmAdminCliente.getPnlAdminCliente1().getBtnModificar().setEnabled(true);
+//                    frmAdminCliente.getPnlAdminCliente1().getBtnEliminar().setEnabled(true);
+//                } else {
+//                    JOptionPane.showMessageDialog(frmAdminCliente, "El cliente no existe.");
+//                }
+//            } else {
+//                JOptionPane.showMessageDialog(frmAdminCliente, "Ingrese los datos correctamente.");
+//            }
+//        }
         if(ae.getActionCommand().equalsIgnoreCase("Eliminar")){
             if(JOptionPane.showConfirmDialog(frmAdminCliente, "¿Está seguro de eliminar este cliente?") == 0){
                 String nombre = frmAdminCliente.getPnlAdminCliente1().getTxtNombre();

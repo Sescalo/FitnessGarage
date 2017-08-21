@@ -10,7 +10,6 @@ import Controlador.ManejadorAdminCliente;
 import Modelo.AdminBaseDatos;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 /**

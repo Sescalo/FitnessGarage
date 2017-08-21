@@ -9,11 +9,6 @@ import Modelo.Cliente;
 import Modelo.Validaciones;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 
 /**
  *
@@ -36,7 +31,6 @@ public class PnlAdminCliente extends javax.swing.JPanel {
     public void escuchar(ActionListener manejador){
         this.btnIncluir.addActionListener(manejador);
         this.btnModificar.addActionListener(manejador);
-        this.btnMostrar.addActionListener(manejador);
         this.btnEliminar.addActionListener(manejador);
         this.btnSalir.addActionListener(manejador);
     }
@@ -249,7 +243,6 @@ public class PnlAdminCliente extends javax.swing.JPanel {
         txtAComentario = new java.awt.TextArea();
         btnIncluir = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
-        btnMostrar = new javax.swing.JButton();
         txtDiasRestantes = new javax.swing.JTextField();
         btnEliminar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -294,8 +287,6 @@ public class PnlAdminCliente extends javax.swing.JPanel {
         btnModificar.setText("Modificar");
         btnModificar.setEnabled(false);
 
-        btnMostrar.setText("Buscar");
-
         btnEliminar.setText("Eliminar");
 
         btnSalir.setText("Salir");
@@ -331,29 +322,35 @@ public class PnlAdminCliente extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel13)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(chboxTratoEspecial)
+                                .addComponent(jLabel12))
+                            .addComponent(idClientelbl))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel15)
+                            .addGap(125, 125, 125)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel9)
-                                .addComponent(jLabel10)
-                                .addComponent(jLabel11)
-                                .addComponent(jLabel14)
-                                .addComponent(jLabel13)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(chboxTratoEspecial)
-                                    .addComponent(jLabel12))
-                                .addComponent(idClientelbl))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addGap(125, 125, 125)))
-                        .addGap(64, 64, 64)
+                        .addGap(19, 19, 19)
+                        .addComponent(btnIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58)
+                        .addComponent(btnModificar)))
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtMorosidades, javax.swing.GroupLayout.Alignment.LEADING)
@@ -372,13 +369,7 @@ public class PnlAdminCliente extends javax.swing.JPanel {
                             .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(20, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(btnIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
-                        .addComponent(btnModificar)
-                        .addGap(60, 60, 60)
-                        .addComponent(btnMostrar)
-                        .addGap(65, 65, 65)
+                        .addGap(14, 14, 14)
                         .addComponent(btnEliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -462,7 +453,6 @@ public class PnlAdminCliente extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
@@ -474,7 +464,6 @@ public class PnlAdminCliente extends javax.swing.JPanel {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnIncluir;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JButton btnMostrar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JCheckBox chboxTratoEspecial;
     private javax.swing.JLabel idClientelbl;
