@@ -8,6 +8,9 @@ package Vista;
 import Modelo.Validaciones;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,11 +21,13 @@ public class MyCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
     private FrmMenu frmMenu;
     private FrmAdminCliente frmAdminCliente;
     private PnlAdminCliente pnlAdminCliente;
+    private Validaciones validaciones;
     
     public MyCellRenderer(FrmMenu frmMenu){
         this.frmMenu = frmMenu;
         this.frmAdminCliente = frmMenu.getFrmAdminCliente();
         this.pnlAdminCliente = frmAdminCliente.getPnlAdminCliente1();
+        this.validaciones = new Validaciones();
     }
     
     public java.awt.Component getTableCellRendererComponent(javax.swing.JTable table, java.lang.Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -60,7 +65,12 @@ public class MyCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
                     tmp = tmp.substring(0, tmp.length()-1);
                 }
                 pnlAdminCliente.setTxtIdCliente(Integer.valueOf((table.getValueAt(row, 0).toString())));
-                pnlAdminCliente.setTxtDiasRestantes(Integer.valueOf((table.getValueAt(row, 1).toString())));
+                try {
+                    pnlAdminCliente.setTxtDiasRestantes(validaciones.calcularDiasRestantes(table.getValueAt(row, 10).toString()));
+                } catch (ParseException ex) {
+                    Logger.getLogger(MyCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
                 pnlAdminCliente.setTxtNombre(tmp);
                 pnlAdminCliente.setTxtPrimApellido(table.getValueAt(row, 3).toString());
                 pnlAdminCliente.setTxtSegApellido(table.getValueAt(row, 4).toString());
@@ -70,12 +80,16 @@ public class MyCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
                 pnlAdminCliente.setTxtEmail(table.getValueAt(row, 8).toString());
                 pnlAdminCliente.setTxtFechaIngreso(table.getValueAt(row, 9).toString());
                 pnlAdminCliente.setTxtFechaPago(table.getValueAt(row, 10).toString());
-                pnlAdminCliente.setTxtFechaProxPago(table.getValueAt(row, 11).toString());
+                try {
+                    pnlAdminCliente.setTxtFechaProxPago(validaciones.generarFechaProxPago(table.getValueAt(row, 10).toString()));
+                } catch (ParseException ex) {
+                    Logger.getLogger(MyCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 pnlAdminCliente.setTxtMorosidades(table.getValueAt(row, 12).toString());
                 pnlAdminCliente.setTxtAComentario(table.getValueAt(row, 13).toString());
                 pnlAdminCliente.setChboxTratoEspecial(esSeleccionado);
                 this.pnlAdminCliente.getBtnModificar().setEnabled(true);
-                if(frmMenu.getNombreUsuario().equalsIgnoreCase("scampos")){
+                if(frmMenu.getNombreUsuario().equalsIgnoreCase("Edu")){
                     this.pnlAdminCliente.getBtnEliminar().setEnabled(true);
                 } else {
                     this.pnlAdminCliente.getBtnEliminar().setEnabled(false);

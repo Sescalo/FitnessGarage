@@ -7,9 +7,14 @@ package Vista;
 
 import Modelo.AdminBaseDatos;
 import Modelo.AtributosCliente;
+import Modelo.Cliente;
 import Modelo.Validaciones;
 import java.awt.Image;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -30,7 +35,7 @@ public class FrmMenu extends javax.swing.JFrame {
     private AdminBaseDatos conexion;
     private FrmHistorial frmHistorial;
     
-    public FrmMenu() throws ClassNotFoundException, SQLException {
+    public FrmMenu() throws ClassNotFoundException, SQLException, ParseException, FileNotFoundException {
         initComponents();
         this.nombreUsuario.setVisible(false);
         deshabilitarComponentes();
@@ -110,6 +115,56 @@ public class FrmMenu extends javax.swing.JFrame {
         this.frmHistorial= frmHistorial;
     }
     
+    public void crearInserts() throws FileNotFoundException{
+        Scanner scanner = new Scanner(new File("C:\\Users\\Sergio\\Desktop\\listaNueva.csv"), "ISO-8859-1");
+        scanner.useDelimiter(";|\\n");
+        int count=0;
+        Cliente cliente = new Cliente();
+        while(scanner.hasNext()){
+            if(count == 0){
+                scanner.next();
+            }
+            else if(count == 1){
+                cliente.setDiasVencimiento(Integer.valueOf(scanner.next()));
+            } else if(count == 2){
+                cliente.setNombreCliente(scanner.next());
+            } else if(count == 3){
+                cliente.setPrimerApellido(scanner.next());
+            } else if(count == 4){
+                cliente.setSegundoApellido(scanner.next());
+            } else if(count == 5){
+                cliente.setCedula(scanner.next());
+            } else if(count == 6){
+                cliente.setTelefono(scanner.next());
+            } else if(count == 7){
+                cliente.setDireccion(scanner.next());
+            } else if(count == 8){
+                cliente.setEmail(scanner.next());
+            } else if(count == 9){
+                cliente.setFechaIngreso(scanner.next());
+            } else if(count == 10){
+                String fechaPago = scanner.next();
+                if(fechaPago.charAt(2) != '/'){
+                    fechaPago = "0"+fechaPago;
+                }if (fechaPago.charAt(5) != '/'){
+                    fechaPago = fechaPago.substring(0,3)+"0"+fechaPago.substring(3, fechaPago.length());
+                }
+                cliente.setFechaPago(fechaPago);
+            } else if(count == 11){
+                cliente.setFechaSigPago(scanner.next());
+            } else if(count == 12){
+                cliente.setComentarios(scanner.next());
+                cliente.setTratoEspecial(false);
+                cliente.setEliminado(false);
+                cliente.setMorosidades("");
+                count = -1;
+                System.out.println(cliente.toString());
+                conexion.agregarCliente(cliente);
+            }
+            count++;
+        }
+        scanner.close();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -303,6 +358,10 @@ public class FrmMenu extends javax.swing.JFrame {
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(FrmMenu.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SQLException ex) {
+                    Logger.getLogger(FrmMenu.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
+                    Logger.getLogger(FrmMenu.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (FileNotFoundException ex) {
                     Logger.getLogger(FrmMenu.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

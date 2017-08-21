@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `fitnessgarage`.`cliente` (
   `eliminado` TINYINT(4) NULL DEFAULT '0',
   PRIMARY KEY (`idCliente`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2012
+AUTO_INCREMENT = 0
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `fitnessgarage`.`usuario` (
   `eliminado` TINYINT(4) NULL DEFAULT '0',
   PRIMARY KEY (`idUsuario`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
+AUTO_INCREMENT = 0
 DEFAULT CHARACTER SET = utf8;
 
 

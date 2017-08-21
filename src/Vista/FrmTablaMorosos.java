@@ -10,6 +10,7 @@ import Modelo.Cliente;
 import Modelo.Validaciones;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JTable;
@@ -31,7 +32,7 @@ public class FrmTablaMorosos extends javax.swing.JFrame {
     /**
      * Creates new form FrmTablaMorosos
      */
-    public FrmTablaMorosos(AdminBaseDatos conexion, FrmMenu frmMenu) {
+    public FrmTablaMorosos(AdminBaseDatos conexion, FrmMenu frmMenu) throws ParseException {
         initComponents();
         this.conexion=conexion;
         this.frmMenu = frmMenu;
@@ -56,13 +57,15 @@ public class FrmTablaMorosos extends javax.swing.JFrame {
     
     }
     
-    public void setTablaMorosos(ArrayList<Cliente> clientes){
+    public void setTablaMorosos(ArrayList<Cliente> clientes) throws ParseException{
         DefaultTableModel modelo = (DefaultTableModel) this.tblMorosos.getModel();
        for(Cliente cliente: clientes){
+           int diasRestantes = validaciones.calcularDiasRestantes(cliente.getFechaPago());
+           String fechaProxPago = validaciones.generarFechaProxPago(cliente.getFechaPago());
            if(validaciones.calcularMorosos(cliente.getFechaPago())){
-                Object[] tmp={cliente.getIdCliente(),cliente.getDiasVencimiento(),cliente.getNombreCliente(),cliente.getPrimerApellido(),cliente.getSegundoApellido(),
+                Object[] tmp={cliente.getIdCliente(),diasRestantes,cliente.getNombreCliente(),cliente.getPrimerApellido(),cliente.getSegundoApellido(),
                 cliente.getCedula(),cliente.getTelefono(),cliente.getDireccion(),cliente.getEmail(),cliente.getFechaIngreso(),
-                cliente.getFechaPago(),cliente.getFechaSigPago(),cliente.getMorosidades(),cliente.getComentarios(),cliente.isTratoEspecial()};
+                cliente.getFechaPago(),fechaProxPago,cliente.getMorosidades(),cliente.getComentarios(),cliente.isTratoEspecial()};
                 modelo.addRow(tmp);
            }
        }

@@ -11,8 +11,8 @@ public class AdminBaseDatos {
     private static final String DB_URL = "jdbc:mysql://localhost/fitnessgarage";
     
     //  Usuario
-    private static final String USER = "Sescalo";
-    private static final String PASS = "sergioesteban96";
+    private static final String USER = "FitnessGarage";
+    private static final String PASS = "fitnessgarage";
 
 //    private static final String USER = "oskrg1130";
 //    private static final String PASS = "noob3001";

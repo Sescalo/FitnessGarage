@@ -5,7 +5,16 @@
  */
 package Modelo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -157,6 +166,30 @@ public class Validaciones {
 //        int tmp;
 //        if(diaAntPago == 30 || diaAntPago == 31)
         return (diaAntPago == dia || diaPago == dia) && mesPago == mes && anoPago == ano;
+    }
+        
+    public int calcularDiasRestantes(String fechaPago) throws ParseException{
+        SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaActual = generarFechaActual();
+        long diff = 0;
+        try {
+            Date date1 = myFormat.parse(fechaActual);
+            Date date2 = myFormat.parse(fechaPago);
+            diff = date2.getTime() - date1.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        int restantes = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+        return restantes;
+    }
+    
+    public String generarFechaProxPago(String fechaPago) throws ParseException{
+        SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date1 = myFormat.parse(fechaPago);
+        date1.setMonth((date1.getMonth() - 1 + 1) % 12 + 1);
+        
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        return df.format(date1);
     }
     
     public boolean validarDatosUsuario(Usuario usuario){

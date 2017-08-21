@@ -8,11 +8,15 @@ package Vista;
 import Modelo.AdminBaseDatos;
 import Modelo.AtributosCliente;
 import Modelo.Cliente;
+import Modelo.Validaciones;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -36,11 +40,13 @@ public class FrmClientes extends javax.swing.JFrame {
     private DefaultTableModel modelo;
     private AdminBaseDatos conexion;
     private FrmMenu frmMenu;
+    private Validaciones validaciones;
     
-    public FrmClientes(AdminBaseDatos conexion, FrmMenu frmMenu) {
+    public FrmClientes(AdminBaseDatos conexion, FrmMenu frmMenu) throws ParseException {
         initComponents();
         this.conexion=conexion;
         this.frmMenu = frmMenu;
+        this.validaciones = new Validaciones();
         this.setTablaCliente(conexion.getClientes());
         tblClientes.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 //        JTableHeader header = tblClientes.getTableHeader();
@@ -91,8 +97,12 @@ public class FrmClientes extends javax.swing.JFrame {
             public void windowActivated(WindowEvent e) {
                 DefaultTableModel tmpModelo = (DefaultTableModel) tblClientes.getModel();
                 tmpModelo.setRowCount(0);
-                setTablaCliente(conexion.getClientes());
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                try {
+                    setTablaCliente(conexion.getClientes());
+                    //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                } catch (ParseException ex) {
+                    Logger.getLogger(FrmClientes.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
             @Override
@@ -106,7 +116,7 @@ public class FrmClientes extends javax.swing.JFrame {
          this.btnSalir.addActionListener(manejador);
     }
     
-    public void setTablaCliente(ArrayList<Cliente> clientes){
+    public void setTablaCliente(ArrayList<Cliente> clientes) throws ParseException{
        DefaultTableModel modelo = (DefaultTableModel) this.tblClientes.getModel();
        String ast;
        for(Cliente cliente: clientes){
@@ -114,9 +124,11 @@ public class FrmClientes extends javax.swing.JFrame {
            if(!cliente.getMorosidades().equalsIgnoreCase("")){
                ast = "*";
            }
-            Object[] tmp={cliente.getIdCliente(),cliente.getDiasVencimiento(),cliente.getNombreCliente()+ast,cliente.getPrimerApellido(),cliente.getSegundoApellido(),
+           int diasRestantes = validaciones.calcularDiasRestantes(cliente.getFechaPago());
+           String fechaProxPago = validaciones.generarFechaProxPago(cliente.getFechaPago());
+            Object[] tmp={cliente.getIdCliente(),diasRestantes,cliente.getNombreCliente()+ast,cliente.getPrimerApellido(),cliente.getSegundoApellido(),
             cliente.getCedula(),cliente.getTelefono(),cliente.getDireccion(),cliente.getEmail(),cliente.getFechaIngreso(),
-            cliente.getFechaPago(),cliente.getFechaSigPago(),cliente.getMorosidades(),cliente.getComentarios(),cliente.isTratoEspecial()};
+            cliente.getFechaPago(),fechaProxPago,cliente.getMorosidades(),cliente.getComentarios(),cliente.isTratoEspecial()};
             modelo.addRow(tmp);
        }
     }
@@ -294,7 +306,11 @@ public class FrmClientes extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "No hay resultados que concuerden con su búsqueda.");
             } else {
                 this.modelo.setRowCount(0);
-                this.setTablaCliente(clientesBusqueda);
+                try {
+                    this.setTablaCliente(clientesBusqueda);
+                } catch (ParseException ex) {
+                    Logger.getLogger(FrmClientes.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         } else {
             JOptionPane.showMessageDialog(this, "El campo de texto de buscar esta vacío.");
@@ -304,7 +320,11 @@ public class FrmClientes extends javax.swing.JFrame {
     private void btnTablaOriginalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTablaOriginalActionPerformed
         // TODO add your handling code here:
         modelo.setRowCount(0);
-        this.setTablaCliente(conexion.getClientes());
+        try {
+            this.setTablaCliente(conexion.getClientes());
+        } catch (ParseException ex) {
+            Logger.getLogger(FrmClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnTablaOriginalActionPerformed
 
     private void btnAdminClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminClienteActionPerformed
