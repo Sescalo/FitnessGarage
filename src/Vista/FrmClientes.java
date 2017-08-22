@@ -70,9 +70,10 @@ public class FrmClientes extends javax.swing.JFrame {
         tblClientes.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent me) {
                 if (me.getClickCount() == 2 && tblClientes.getSelectedRow() != -1) {
+                    ArrayList<Cliente> clientes = conexion.getClientes();
                     int indice = tblClientes.getSelectedRow();
                     Cliente cliente = clientes.get(indice);
-                    
+                    tblClientes.getCellEditor().stopCellEditing();
                     String tmp = cliente.getNombreCliente();
                     if(!cliente.getMorosidades().equalsIgnoreCase("")){
                         tmp = tmp.substring(0, tmp.length()-1);
