@@ -33,10 +33,9 @@ public class MyCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
     public java.awt.Component getTableCellRendererComponent(javax.swing.JTable table, java.lang.Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             final java.awt.Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             //MouseEvent evento;
-            Object fechaPago = table.getValueAt(row, 10);
+            Object fechaPago = table.getValueAt(row, 11);
             Object seleccionado = table.getValueAt(row, 14);
             String sval = fechaPago.toString();
-            Validaciones validaciones = new Validaciones();
             boolean moroso = validaciones.calcularMorosos(sval);
             String sseleccionado = seleccionado.toString();
             boolean esSeleccionado = Boolean.valueOf(sseleccionado);
@@ -60,41 +59,41 @@ public class MyCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
             if (isSelected) {
                 cellComponent.setForeground(table.getSelectionForeground());
                 cellComponent.setBackground(table.getSelectionBackground());
-                String tmp = table.getValueAt(row, 2).toString();
-                if(!table.getValueAt(row, 12).toString().equalsIgnoreCase("")){
-                    tmp = tmp.substring(0, tmp.length()-1);
-                }
-                pnlAdminCliente.setTxtIdCliente(Integer.valueOf((table.getValueAt(row, 0).toString())));
-                try {
-                    pnlAdminCliente.setTxtDiasRestantes(validaciones.calcularDiasRestantes(table.getValueAt(row, 10).toString()));
-                } catch (ParseException ex) {
-                    Logger.getLogger(MyCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-                pnlAdminCliente.setTxtNombre(tmp);
-                pnlAdminCliente.setTxtPrimApellido(table.getValueAt(row, 3).toString());
-                pnlAdminCliente.setTxtSegApellido(table.getValueAt(row, 4).toString());
-                pnlAdminCliente.setTxtCedula(table.getValueAt(row, 5).toString());
-                pnlAdminCliente.setTxtTelefono(table.getValueAt(row, 6).toString());
-                pnlAdminCliente.setTxtDireccion(table.getValueAt(row, 7).toString());
-                pnlAdminCliente.setTxtEmail(table.getValueAt(row, 8).toString());
-                pnlAdminCliente.setTxtFechaIngreso(table.getValueAt(row, 9).toString());
-                pnlAdminCliente.setTxtFechaPago(table.getValueAt(row, 10).toString());
-                try {
-                    pnlAdminCliente.setTxtFechaProxPago(validaciones.generarFechaProxPago(table.getValueAt(row, 10).toString()));
-                } catch (ParseException ex) {
-                    Logger.getLogger(MyCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                pnlAdminCliente.setTxtMorosidades(table.getValueAt(row, 12).toString());
-                pnlAdminCliente.setTxtAComentario(table.getValueAt(row, 13).toString());
-                pnlAdminCliente.setChboxTratoEspecial(esSeleccionado);
-                this.pnlAdminCliente.getBtnModificar().setEnabled(true);
-                if(frmMenu.getNombreUsuario().equalsIgnoreCase("Edu")){
-                    this.pnlAdminCliente.getBtnEliminar().setEnabled(true);
-                } else {
-                    this.pnlAdminCliente.getBtnEliminar().setEnabled(false);
-                }
-                this.frmAdminCliente.setVisible(true);
+//                String tmp = table.getValueAt(row, 2).toString();
+//                if(!table.getValueAt(row, 12).toString().equalsIgnoreCase("")){
+//                    tmp = tmp.substring(0, tmp.length()-1);
+//                }
+//                pnlAdminCliente.setTxtIdCliente(Integer.valueOf((table.getValueAt(row, 0).toString())));
+//                try {
+//                    pnlAdminCliente.setTxtDiasRestantes(validaciones.calcularDiasRestantes(table.getValueAt(row, 10).toString()));
+//                } catch (ParseException ex) {
+//                    Logger.getLogger(MyCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                
+//                pnlAdminCliente.setTxtNombre(tmp);
+//                pnlAdminCliente.setTxtPrimApellido(table.getValueAt(row, 3).toString());
+//                pnlAdminCliente.setTxtSegApellido(table.getValueAt(row, 4).toString());
+//                pnlAdminCliente.setTxtCedula(table.getValueAt(row, 5).toString());
+//                pnlAdminCliente.setTxtTelefono(table.getValueAt(row, 6).toString());
+//                pnlAdminCliente.setTxtDireccion(table.getValueAt(row, 7).toString());
+//                pnlAdminCliente.setTxtEmail(table.getValueAt(row, 8).toString());
+//                pnlAdminCliente.setTxtFechaIngreso(table.getValueAt(row, 9).toString());
+//                pnlAdminCliente.setTxtFechaPago(table.getValueAt(row, 10).toString());
+//                try {
+//                    pnlAdminCliente.setTxtFechaProxPago(validaciones.generarFechaProxPago(table.getValueAt(row, 10).toString()));
+//                } catch (ParseException ex) {
+//                    Logger.getLogger(MyCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                pnlAdminCliente.setTxtMorosidades(table.getValueAt(row, 12).toString());
+//                pnlAdminCliente.setTxtAComentario(table.getValueAt(row, 13).toString());
+//                pnlAdminCliente.setChboxTratoEspecial(esSeleccionado);
+//                this.pnlAdminCliente.getBtnModificar().setEnabled(true);
+//                if(frmMenu.getNombreUsuario().equalsIgnoreCase("Edu")){
+//                    this.pnlAdminCliente.getBtnEliminar().setEnabled(true);
+//                } else {
+//                    this.pnlAdminCliente.getBtnEliminar().setEnabled(false);
+//                }
+//                this.frmAdminCliente.setVisible(true);
                 
             }
 

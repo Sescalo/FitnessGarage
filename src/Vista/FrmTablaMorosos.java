@@ -60,7 +60,7 @@ public class FrmTablaMorosos extends javax.swing.JFrame {
     public void setTablaMorosos(ArrayList<Cliente> clientes) throws ParseException{
         DefaultTableModel modelo = (DefaultTableModel) this.tblMorosos.getModel();
        for(Cliente cliente: clientes){
-           int diasRestantes = validaciones.calcularDiasRestantes(cliente.getFechaPago());
+           int diasRestantes = validaciones.calcularDiasRestantes(cliente.getFechaSigPago());
            String fechaProxPago = validaciones.generarFechaProxPago(cliente.getFechaPago());
            if(validaciones.calcularMorosos(cliente.getFechaPago())){
                 Object[] tmp={cliente.getIdCliente(),diasRestantes,cliente.getNombreCliente(),cliente.getPrimerApellido(),cliente.getSegundoApellido(),

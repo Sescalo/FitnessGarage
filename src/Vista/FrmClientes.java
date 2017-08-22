@@ -10,7 +10,10 @@ import Modelo.AtributosCliente;
 import Modelo.Cliente;
 import Modelo.Validaciones;
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.text.ParseException;
@@ -47,7 +50,8 @@ public class FrmClientes extends javax.swing.JFrame {
         this.conexion=conexion;
         this.frmMenu = frmMenu;
         this.validaciones = new Validaciones();
-        this.setTablaCliente(conexion.getClientes());
+        ArrayList<Cliente> clientes = conexion.getClientes();
+        this.setTablaCliente(clientes);
         tblClientes.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 //        JTableHeader header = tblClientes.getTableHeader();
 //        header.setBackground(Color.red);
@@ -63,6 +67,50 @@ public class FrmClientes extends javax.swing.JFrame {
         
         tblClientes.setDefaultRenderer(Object.class, new MyCellRenderer(frmMenu));
         //modelo.setRowColor(0, Color.RED);
+        tblClientes.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent me) {
+                if (me.getClickCount() == 2 && tblClientes.getSelectedRow() != -1) {
+                    int indice = tblClientes.getSelectedRow();
+                    Cliente cliente = clientes.get(indice);
+                    
+                    String tmp = cliente.getNombreCliente();
+                    if(!cliente.getMorosidades().equalsIgnoreCase("")){
+                        tmp = tmp.substring(0, tmp.length()-1);
+                    }
+                    frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtIdCliente(cliente.getIdCliente());
+                    try {
+                        frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtDiasRestantes(validaciones.calcularDiasRestantes(cliente.getFechaSigPago()));
+                    } catch (ParseException ex) {
+                        Logger.getLogger(MyCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtNombre(tmp);
+                    frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtPrimApellido(cliente.getPrimerApellido());
+                    frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtSegApellido(cliente.getSegundoApellido());
+                    frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtCedula(cliente.getCedula());
+                    frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtTelefono(cliente.getTelefono());
+                    frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtDireccion(cliente.getDireccion());
+                    frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtEmail(cliente.getEmail());
+                    frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtFechaIngreso(cliente.getFechaIngreso());
+                    frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtFechaPago(cliente.getFechaPago());
+                    try {
+                        frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtFechaProxPago(validaciones.generarFechaProxPago(cliente.getFechaPago()));
+                    } catch (ParseException ex) {
+                        Logger.getLogger(MyCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtMorosidades(cliente.getMorosidades());
+                    frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtAComentario(cliente.getComentarios());
+                    frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setChboxTratoEspecial(cliente.isTratoEspecial());
+                    frmMenu.getFrmAdminCliente().getPnlAdminCliente1().getBtnModificar().setEnabled(true);
+                    if(frmMenu.getNombreUsuario().equalsIgnoreCase("Edu")){
+                        frmMenu.getFrmAdminCliente().getPnlAdminCliente1().getBtnEliminar().setEnabled(true);
+                    } else {
+                        frmMenu.getFrmAdminCliente().getPnlAdminCliente1().getBtnEliminar().setEnabled(false);
+                    }
+                    frmMenu.getFrmAdminCliente().setVisible(true);
+                }
+            }
+        });
         this.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {
@@ -124,7 +172,7 @@ public class FrmClientes extends javax.swing.JFrame {
            if(!cliente.getMorosidades().equalsIgnoreCase("")){
                ast = "*";
            }
-           int diasRestantes = validaciones.calcularDiasRestantes(cliente.getFechaPago());
+           int diasRestantes = validaciones.calcularDiasRestantes(cliente.getFechaSigPago());
            String fechaProxPago = validaciones.generarFechaProxPago(cliente.getFechaPago());
             Object[] tmp={cliente.getIdCliente(),diasRestantes,cliente.getNombreCliente()+ast,cliente.getPrimerApellido(),cliente.getSegundoApellido(),
             cliente.getCedula(),cliente.getTelefono(),cliente.getDireccion(),cliente.getEmail(),cliente.getFechaIngreso(),

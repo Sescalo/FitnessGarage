@@ -80,8 +80,7 @@ public class ManejadorAdminCliente implements ActionListener {
         if(ae.getActionCommand().equalsIgnoreCase("Modificar")){
             Cliente cliente = clienteVacio();
             if(cliente != null){
-                    if(validaciones.validarNombres(cliente.getNombreCliente(), cliente.getPrimerApellido(), cliente.getSegundoApellido()) 
-                            && validaciones.validarFecha(cliente.getFechaIngreso()) && validaciones.validarFecha(cliente.getFechaPago())){
+                    if(validaciones.validarFecha(cliente.getFechaPago())){
                         if(JOptionPane.showConfirmDialog(frmAdminCliente, "¿Está seguro de modificar este cliente?") == 0){
                             conexion.modificarCliente(cliente);
                             JOptionPane.showMessageDialog(frmAdminCliente, "Cliente modificado correctamente.");
