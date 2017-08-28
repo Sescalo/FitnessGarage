@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -44,12 +45,16 @@ public class FrmClientes extends javax.swing.JFrame {
     private AdminBaseDatos conexion;
     private FrmMenu frmMenu;
     private Validaciones validaciones;
+    private FrmTipoCliente tipoCliente;
+    private Cliente cliente;
     
     public FrmClientes(AdminBaseDatos conexion, FrmMenu frmMenu) throws ParseException {
         initComponents();
         this.conexion=conexion;
         this.frmMenu = frmMenu;
         this.validaciones = new Validaciones();
+        this.tipoCliente = new FrmTipoCliente();
+        this.cliente = new Cliente();
         ArrayList<Cliente> clientes = conexion.getClientes();
         this.setTablaCliente(clientes);
         tblClientes.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -144,10 +149,40 @@ public class FrmClientes extends javax.swing.JFrame {
 
             @Override
             public void windowActivated(WindowEvent e) {
+                ArrayList<Cliente> clientes = conexion.getClientes();
+                ArrayList<Cliente> activos = new ArrayList<>();
+                ArrayList<Cliente> morosos = new ArrayList<>();
+                ArrayList<Cliente> advertencia = new ArrayList<>();
+                ArrayList<Cliente> especial = new ArrayList<>();
+                
+                try {
+                    activos = cliente.getClientesActivos(clientes);
+                    morosos = cliente.getClientesMorosos(clientes);
+                    advertencia = cliente.getClientesMorPronta(clientes);
+                    especial = cliente.getClientesTratoEspecial(clientes);
+                } catch (ParseException ex) {
+                    Logger.getLogger(FrmClientes.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
                 DefaultTableModel tmpModelo = (DefaultTableModel) tblClientes.getModel();
                 tmpModelo.setRowCount(0);
+                setActivos("Activs: "+activos.size());
+                setMorosos("Morosos: "+morosos.size());
+                setMorosidadPronta("Advertencia: "+advertencia.size());
+                setTratoEspecial("T. Especial: "+especial.size());
                 try {
-                    setTablaCliente(conexion.getClientes());
+                    if(tipoCliente.getRadioSeleccionado().equalsIgnoreCase("Todos")){
+                        setTablaCliente(clientes);
+                    } else if(tipoCliente.getRadioSeleccionado().equalsIgnoreCase("Activos")){
+                        setTablaCliente(activos);
+                    } else if(tipoCliente.getRadioSeleccionado().equalsIgnoreCase("Morosos")){
+                        setTablaCliente(morosos);
+                    } else if(tipoCliente.getRadioSeleccionado().equalsIgnoreCase("Advertencia")){
+                        setTablaCliente(advertencia);
+                    } else if(tipoCliente.getRadioSeleccionado().equalsIgnoreCase("Tratos Especiales")){
+                        setTablaCliente(especial);
+                    }
+                    
                     //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 } catch (ParseException ex) {
                     Logger.getLogger(FrmClientes.class.getName()).log(Level.SEVERE, null, ex);
@@ -214,8 +249,13 @@ public class FrmClientes extends javax.swing.JFrame {
         btnAdminCliente = new javax.swing.JButton();
         btnTablaOriginal = new javax.swing.JButton();
         comboBox = new javax.swing.JComboBox<>();
+        activos = new javax.swing.JLabel();
+        morosos = new javax.swing.JLabel();
+        morosidadPronta = new javax.swing.JLabel();
+        tratoEspecial = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Tabla de Clientes");
         setPreferredSize(new java.awt.Dimension(800, 480));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
@@ -279,12 +319,28 @@ public class FrmClientes extends javax.swing.JFrame {
             }
         });
 
-        btnTablaOriginal.setText("Ver Tabla Original");
+        btnTablaOriginal.setText("Cambiar Vista");
         btnTablaOriginal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTablaOriginalActionPerformed(evt);
             }
         });
+
+        activos.setBackground(new java.awt.Color(51, 255, 0));
+        activos.setText("Activos: ");
+        activos.setOpaque(true);
+
+        morosos.setBackground(new java.awt.Color(255, 0, 0));
+        morosos.setText("Morosos: ");
+        morosos.setOpaque(true);
+
+        morosidadPronta.setBackground(new java.awt.Color(255, 255, 0));
+        morosidadPronta.setText("Advertencia: ");
+        morosidadPronta.setOpaque(true);
+
+        tratoEspecial.setBackground(new java.awt.Color(0, 0, 255));
+        tratoEspecial.setText("T. Especial: ");
+        tratoEspecial.setOpaque(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -293,41 +349,59 @@ public class FrmClientes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBuscar)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBuscar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(activos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(morosos, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(morosidadPronta, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+                                    .addComponent(tratoEspecial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btnAdminCliente)
                                 .addGap(39, 39, 39)
                                 .addComponent(btnTablaOriginal)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(15, 15, 15))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(15, 15, 15))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(comboBox, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(comboBox, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtBuscar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(activos, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(morosidadPronta, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(morosos, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tratoEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
@@ -368,13 +442,46 @@ public class FrmClientes extends javax.swing.JFrame {
 
     private void btnTablaOriginalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTablaOriginalActionPerformed
         // TODO add your handling code here:
-        modelo.setRowCount(0);
-        try {
-            this.setTablaCliente(conexion.getClientes());
-        } catch (ParseException ex) {
-            Logger.getLogger(FrmClientes.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.tipoCliente.setVisible(true);
+//        modelo.setRowCount(0);
+//        try {
+//            this.setTablaCliente(conexion.getClientes());
+//        } catch (ParseException ex) {
+//            Logger.getLogger(FrmClientes.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_btnTablaOriginalActionPerformed
+
+    public String getActivos() {
+        return activos.getText();
+    }
+
+    public void setActivos(String activos) {
+        this.activos.setText(activos);
+    }
+
+    public String getMorosidadPronta() {
+        return morosidadPronta.getText();
+    }
+
+    public void setMorosidadPronta(String morosidadPronta) {
+        this.morosidadPronta.setText(morosidadPronta);
+    }
+
+    public String getMorosos() {
+        return morosos.getText();
+    }
+
+    public void setMorosos(String morosos) {
+        this.morosos.setText(morosos);
+    }
+
+    public String getTratoEspecial() {
+        return tratoEspecial.getText();
+    }
+
+    public void setTratoEspecial(String tratoEspecial) {
+        this.tratoEspecial.setText(tratoEspecial);
+    }
 
     private void btnAdminClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminClienteActionPerformed
         // TODO add your handling code here:
@@ -385,6 +492,7 @@ public class FrmClientes extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel activos;
     private javax.swing.JButton btnAdminCliente;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnSalir;
@@ -392,7 +500,10 @@ public class FrmClientes extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel morosidadPronta;
+    private javax.swing.JLabel morosos;
     private javax.swing.JTable tblClientes;
+    private javax.swing.JLabel tratoEspecial;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

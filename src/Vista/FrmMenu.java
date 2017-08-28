@@ -10,13 +10,16 @@ import Modelo.AtributosCliente;
 import Modelo.Cliente;
 import Modelo.Validaciones;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -46,6 +49,14 @@ public class FrmMenu extends javax.swing.JFrame {
         this.frmAdminUsuario = new FrmAdminUsuario(conexion, this);
         this.frmCliente = new FrmClientes(conexion, this);
         this.frmHistorial = new FrmHistorial(conexion, this);
+        this.setResizable(false);
+        this.setIconImage(new ImageIcon("src/Img/icono.jpg").getImage());
+        frmAdminCliente.setIconImage(new ImageIcon("src/Img/icono.jpg").getImage());
+        frmAdminUsuario.setIconImage(new ImageIcon("src/Img/icono.jpg").getImage());
+        frmCliente.setIconImage(new ImageIcon("src/Img/icono.jpg").getImage());
+        frmMorosos.setIconImage(new ImageIcon("src/Img/icono.jpg").getImage());
+        frmHistorial.setIconImage(new ImageIcon("src/Img/icono.jpg").getImage());
+        frmSesion.setIconImage(new ImageIcon("src/Img/icono.jpg").getImage());
     }
     
     public void deshabilitarComponentes() {
@@ -190,6 +201,7 @@ public class FrmMenu extends javax.swing.JFrame {
         mniHistorial = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Fitness Garage Wellness Center");
         setPreferredSize(new java.awt.Dimension(902, 540));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/grande.png"))); // NOI18N

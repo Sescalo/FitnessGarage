@@ -5,6 +5,9 @@
  */
 package Modelo;
 
+import java.text.ParseException;
+import java.util.ArrayList;
+
 /**
  *
  * @author Sergio
@@ -27,6 +30,7 @@ public class Cliente {
     private String comentarios;
     private boolean tratoEspecial;
     private boolean eliminado;
+    
 
     public Cliente(int idCliente, int diasVencimiento, String nombreCliente, String primerApellido, String segundoApellido, String cedula, String telefono, String direccion, String email, String fechaIngreso, String fechaPago, String fechaSigPago, String morosidades, String comentarios, boolean tratoEspecial, boolean eliminado) {
         this.idCliente = idCliente;
@@ -195,6 +199,55 @@ public class Cliente {
 
     public void setEliminado(boolean eliminado) {
         this.eliminado = eliminado;
+    }
+    
+        public ArrayList<Cliente> getClientesActivos(ArrayList<Cliente> clientes) throws ParseException {
+        Validaciones validaciones = new Validaciones();
+        ArrayList<Cliente> clientesMorosos = new ArrayList<>();
+        for (Cliente cliente : clientes){
+            String fechaProxPago = validaciones.generarFechaProxPago(cliente.getFechaPago());
+            cliente.setFechaSigPago(fechaProxPago);
+            if (!validaciones.calcularMorosos(cliente.getFechaSigPago())){
+                clientesMorosos.add(cliente);
+            }
+        }
+        return clientesMorosos;
+    }
+    
+    public ArrayList<Cliente> getClientesMorosos(ArrayList<Cliente> clientes) throws ParseException {
+        Validaciones validaciones = new Validaciones();
+        ArrayList<Cliente> clientesMorosos = new ArrayList<>();
+        for (Cliente cliente : clientes){
+            String fechaProxPago = validaciones.generarFechaProxPago(cliente.getFechaPago());
+            cliente.setFechaSigPago(fechaProxPago);
+            if (validaciones.calcularMorosos(cliente.getFechaSigPago())){
+                clientesMorosos.add(cliente);
+            }
+        }
+        return clientesMorosos;
+    }
+    
+    public ArrayList<Cliente> getClientesMorPronta(ArrayList<Cliente> clientes) throws ParseException {
+        Validaciones validaciones = new Validaciones();
+        ArrayList<Cliente> clientesMorosos = new ArrayList<>();
+        for (Cliente cliente : clientes){
+            String fechaProxPago = validaciones.generarFechaProxPago(cliente.getFechaPago());
+            cliente.setFechaSigPago(fechaProxPago);
+            if (validaciones.calcularMorosidadPronta(cliente.getFechaSigPago())){
+                clientesMorosos.add(cliente);
+            }
+        }
+        return clientesMorosos;
+    }
+    
+    public ArrayList<Cliente> getClientesTratoEspecial(ArrayList<Cliente> clientes) {
+        ArrayList<Cliente> clientesMorosos = new ArrayList<>();
+        for (Cliente cliente : clientes){
+            if (cliente.tratoEspecial){
+                clientesMorosos.add(cliente);
+            }
+        }
+        return clientesMorosos;
     }
 
     @Override
