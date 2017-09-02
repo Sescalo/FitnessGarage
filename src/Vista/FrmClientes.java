@@ -9,8 +9,6 @@ import Modelo.AdminBaseDatos;
 import Modelo.AtributosCliente;
 import Modelo.Cliente;
 import Modelo.Validaciones;
-import java.awt.Color;
-import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -23,13 +21,10 @@ import java.util.logging.Logger;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -64,6 +59,7 @@ public class FrmClientes extends javax.swing.JFrame {
         this.modelo = (DefaultTableModel) tblClientes.getModel();
         
         comboBox.setModel(new DefaultComboBoxModel(AtributosCliente.values()));
+        comboBox.setSelectedIndex(2);
         
         JTextField tf = new JTextField();
         tf.setEditable(false);
@@ -76,13 +72,23 @@ public class FrmClientes extends javax.swing.JFrame {
             public void mousePressed(MouseEvent me) {
                 if (me.getClickCount() == 2 && tblClientes.getSelectedRow() != -1) {
                     ArrayList<Cliente> clientes = conexion.getClientes();
+                        try {
+                            if(tipoCliente.getRadioSeleccionado().equalsIgnoreCase("Activos")){
+                                clientes = cliente.getClientesActivos(clientes);
+                            } else if(tipoCliente.getRadioSeleccionado().equalsIgnoreCase("Morosos")){
+                                clientes = cliente.getClientesMorosos(clientes);
+                            } else if(tipoCliente.getRadioSeleccionado().equalsIgnoreCase("Advertencia")){
+                                clientes = cliente.getClientesMorPronta(clientes);
+                            } else if(tipoCliente.getRadioSeleccionado().equalsIgnoreCase("Tratos Especiales")){
+                                clientes = cliente.getClientesTratoEspecial(clientes);
+                            }                              
+                        } catch (ParseException ex) {
+                            Logger.getLogger(FrmClientes.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     int indice = tblClientes.getSelectedRow();
                     Cliente cliente = clientes.get(indice);
                     tblClientes.getCellEditor().stopCellEditing();
-                    String tmp = cliente.getNombreCliente();
-                    if(!cliente.getMorosidades().equalsIgnoreCase("")){
-                        tmp = tmp.substring(0, tmp.length()-1);
-                    }
+
                     frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtIdCliente(cliente.getIdCliente());
                     try {
                         frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtDiasRestantes(validaciones.calcularDiasRestantes(cliente.getFechaSigPago()));
@@ -90,7 +96,7 @@ public class FrmClientes extends javax.swing.JFrame {
                         Logger.getLogger(MyCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
-                    frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtNombre(tmp);
+                    frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtNombre(cliente.getNombreCliente());
                     frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtPrimApellido(cliente.getPrimerApellido());
                     frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtSegApellido(cliente.getSegundoApellido());
                     frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtCedula(cliente.getCedula());
@@ -166,7 +172,7 @@ public class FrmClientes extends javax.swing.JFrame {
                 
                 DefaultTableModel tmpModelo = (DefaultTableModel) tblClientes.getModel();
                 tmpModelo.setRowCount(0);
-                setActivos("Activs: "+activos.size());
+                setActivos("Activos: "+activos.size());
                 setMorosos("Morosos: "+morosos.size());
                 setMorosidadPronta("Advertencia: "+advertencia.size());
                 setTratoEspecial("T. Especial: "+especial.size());
@@ -273,9 +279,16 @@ public class FrmClientes extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, true, true, true, true, true, true, true, true, true, true, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         tblClientes.getTableHeader().setReorderingAllowed(false);
