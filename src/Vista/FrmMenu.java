@@ -10,16 +10,20 @@ import Modelo.AtributosCliente;
 import Modelo.Cliente;
 import Modelo.Validaciones;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -38,7 +42,7 @@ public class FrmMenu extends javax.swing.JFrame {
     private AdminBaseDatos conexion;
     private FrmHistorial frmHistorial;
     
-    public FrmMenu() throws ClassNotFoundException, SQLException, ParseException, FileNotFoundException {
+    public FrmMenu() throws ClassNotFoundException, SQLException, ParseException, FileNotFoundException, IOException {
         initComponents();
         this.nombreUsuario.setVisible(false);
         deshabilitarComponentes();
@@ -50,13 +54,13 @@ public class FrmMenu extends javax.swing.JFrame {
         this.frmCliente = new FrmClientes(conexion, this);
         this.frmHistorial = new FrmHistorial(conexion, this);
         this.setResizable(false);
-        this.setIconImage(new ImageIcon("src/Img/icono.jpg").getImage());
-        frmAdminCliente.setIconImage(new ImageIcon("src/Img/icono.jpg").getImage());
-        frmAdminUsuario.setIconImage(new ImageIcon("src/Img/icono.jpg").getImage());
-        frmCliente.setIconImage(new ImageIcon("src/Img/icono.jpg").getImage());
-        frmMorosos.setIconImage(new ImageIcon("src/Img/icono.jpg").getImage());
-        frmHistorial.setIconImage(new ImageIcon("src/Img/icono.jpg").getImage());
-        frmSesion.setIconImage(new ImageIcon("src/Img/icono.jpg").getImage());
+        this.setIconImage(new ImageIcon(this.getClass().getResource("/Img/icono.jpg")).getImage());
+        frmAdminCliente.setIconImage(new ImageIcon(frmAdminCliente.getClass().getResource("/Img/icono.jpg")).getImage());
+        frmAdminUsuario.setIconImage(new ImageIcon(frmAdminUsuario.getClass().getResource("/Img/icono.jpg")).getImage());
+        frmCliente.setIconImage(new ImageIcon(frmCliente.getClass().getResource("/Img/icono.jpg")).getImage());
+        frmMorosos.setIconImage(new ImageIcon(frmMorosos.getClass().getResource("/Img/icono.jpg")).getImage());
+        frmHistorial.setIconImage(new ImageIcon(frmHistorial.getClass().getResource("/Img/icono.jpg")).getImage());
+        frmSesion.setIconImage(new ImageIcon(frmSesion.getClass().getResource("/Img/icono.jpg")).getImage());
     }
     
     public void deshabilitarComponentes() {
@@ -374,6 +378,8 @@ public class FrmMenu extends javax.swing.JFrame {
                 } catch (ParseException ex) {
                     Logger.getLogger(FrmMenu.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (FileNotFoundException ex) {
+                    Logger.getLogger(FrmMenu.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
                     Logger.getLogger(FrmMenu.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

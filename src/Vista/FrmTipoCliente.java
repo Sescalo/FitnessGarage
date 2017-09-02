@@ -32,7 +32,7 @@ public class FrmTipoCliente extends javax.swing.JFrame {
         radioGrupo.add(radioEspecial);
         this.setResizable(false);
         this.radioSeleccionado = "Todos";
-        this.setIconImage(new ImageIcon("src/Img/icono.jpg").getImage());
+        this.setIconImage(new ImageIcon(this.getClass().getResource("/Img/icono.jpg")).getImage());
     }
 
     /**
