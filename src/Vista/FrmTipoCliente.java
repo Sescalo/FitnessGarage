@@ -30,6 +30,8 @@ public class FrmTipoCliente extends javax.swing.JFrame {
         radioGrupo.add(radioMorosos);
         radioGrupo.add(radioFechaCercana);
         radioGrupo.add(radioEspecial);
+        radioGrupo.add(radioBusqueda);
+        radioBusqueda.setVisible(false);
         this.setResizable(false);
         this.radioSeleccionado = "Todos";
         this.setIconImage(new ImageIcon(this.getClass().getResource("/Img/icono.jpg")).getImage());
@@ -52,6 +54,7 @@ public class FrmTipoCliente extends javax.swing.JFrame {
         radioMorosos = new javax.swing.JRadioButton();
         radioFechaCercana = new javax.swing.JRadioButton();
         radioEspecial = new javax.swing.JRadioButton();
+        radioBusqueda = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cambiar Vista");
@@ -110,6 +113,13 @@ public class FrmTipoCliente extends javax.swing.JFrame {
             }
         });
 
+        radioBusqueda.setText("radioBusqueda");
+        radioBusqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBusquedaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,7 +138,8 @@ public class FrmTipoCliente extends javax.swing.JFrame {
                                     .addComponent(radioActivos)
                                     .addComponent(radioFechaCercana)
                                     .addComponent(radioEspecial)
-                                    .addComponent(radioGeneral))))
+                                    .addComponent(radioGeneral)
+                                    .addComponent(radioBusqueda))))
                         .addGap(0, 26, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
@@ -152,7 +163,9 @@ public class FrmTipoCliente extends javax.swing.JFrame {
                 .addComponent(radioFechaCercana)
                 .addGap(18, 18, 18)
                 .addComponent(radioEspecial)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(radioBusqueda)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonAceptar)
                     .addComponent(botonSalir))
@@ -210,6 +223,12 @@ public class FrmTipoCliente extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_botonAceptarActionPerformed
 
+    private void radioBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBusquedaActionPerformed
+        // TODO add your handling code here:
+        this.radioGrupo.clearSelection();
+        this.radioBusqueda.setSelected(true);
+    }//GEN-LAST:event_radioBusquedaActionPerformed
+
     public String getRadioSeleccionado() {
         return radioSeleccionado;
     }
@@ -217,12 +236,19 @@ public class FrmTipoCliente extends javax.swing.JFrame {
     public void setRadioSeleccionado(String radioSeleccionado) {
         this.radioSeleccionado = radioSeleccionado;
     }
+    
+    public void setRadioBusqueda(){
+        this.radioGrupo.clearSelection();
+        this.radioBusqueda.setSelected(true);
+        this.radioSeleccionado = "radioBusqueda";
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAceptar;
     private javax.swing.JButton botonSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButton radioActivos;
+    private javax.swing.JRadioButton radioBusqueda;
     private javax.swing.JRadioButton radioEspecial;
     private javax.swing.JRadioButton radioFechaCercana;
     private javax.swing.JRadioButton radioGeneral;

@@ -44,7 +44,14 @@ public class FrmTablaMorosos extends javax.swing.JFrame {
         DefaultCellEditor editor = new DefaultCellEditor( tf );
         tblMorosos.setDefaultEditor(Object.class, editor);
         
-        this.setTablaMorosos(morosos);
+        ArrayList<Cliente> morosos2 = new ArrayList<>();
+        for(Cliente cliente : morosos){
+            if (validaciones.calcularDiasRestantes(cliente.getFechaSigPago()) == -1){
+                morosos2.add(cliente);
+            }
+        }
+        
+        this.setTablaMorosos(morosos2);
         tblMorosos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         JTableHeader header = tblMorosos.getTableHeader();
         header.setBackground(Color.red);

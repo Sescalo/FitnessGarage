@@ -81,7 +81,14 @@ public class FrmClientes extends javax.swing.JFrame {
                                 clientes = cliente.getClientesMorPronta(clientes);
                             } else if(tipoCliente.getRadioSeleccionado().equalsIgnoreCase("Tratos Especiales")){
                                 clientes = cliente.getClientesTratoEspecial(clientes);
-                            }                              
+                            } else if(tipoCliente.getRadioSeleccionado().equalsIgnoreCase("radioBusqueda")){
+                                AtributosCliente ac = (AtributosCliente)comboBox.getSelectedItem();
+                                if(ac.name().equalsIgnoreCase("fechaSigPago")){
+                                    clientes = getClientesFechaSigPago(txtBuscar.getText());
+                                } else {
+                                    clientes = conexion.getClientesBusqueda(txtBuscar.getText(), ac.name());
+                                }
+                            }                            
                         } catch (ParseException ex) {
                             Logger.getLogger(FrmClientes.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -187,6 +194,13 @@ public class FrmClientes extends javax.swing.JFrame {
                         setTablaCliente(advertencia);
                     } else if(tipoCliente.getRadioSeleccionado().equalsIgnoreCase("Tratos Especiales")){
                         setTablaCliente(especial);
+                    } else if(tipoCliente.getRadioSeleccionado().equalsIgnoreCase("radioBusqueda")){
+                        AtributosCliente ac = (AtributosCliente)comboBox.getSelectedItem();
+                        if(ac.name().equalsIgnoreCase("fechaSigPago")){
+                            setTablaCliente(getClientesFechaSigPago(txtBuscar.getText()));
+                        } else {
+                            setTablaCliente(conexion.getClientesBusqueda(txtBuscar.getText(), ac.name()));
+                        }
                     }
                     
                     //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -234,7 +248,6 @@ public class FrmClientes extends javax.swing.JFrame {
     public JComboBox<String> getComboBox() {
         return comboBox;
     }
-    
     
     
     /**
@@ -437,13 +450,24 @@ public class FrmClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(!this.txtBuscar.getText().equalsIgnoreCase("")){
             AtributosCliente ac = (AtributosCliente)comboBox.getSelectedItem();
-            ArrayList<Cliente> clientesBusqueda = conexion.getClientesBusqueda(this.txtBuscar.getText(), ac.name());
+            ArrayList<Cliente> clientesBusqueda = new ArrayList<>();
+            if(ac.name().equalsIgnoreCase("fechaSigPago")){
+                try {
+                    clientesBusqueda = getClientesFechaSigPago(this.txtBuscar.getText());
+                } catch (ParseException ex) {
+                    Logger.getLogger(FrmClientes.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                clientesBusqueda = conexion.getClientesBusqueda(this.txtBuscar.getText(), ac.name());
+            }
+            
             if(clientesBusqueda.isEmpty()){
                 JOptionPane.showMessageDialog(this, "No hay resultados que concuerden con su búsqueda.");
             } else {
                 this.modelo.setRowCount(0);
                 try {
                     this.setTablaCliente(clientesBusqueda);
+                    this.tipoCliente.setRadioBusqueda();
                 } catch (ParseException ex) {
                     Logger.getLogger(FrmClientes.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -453,6 +477,17 @@ public class FrmClientes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    public ArrayList<Cliente> getClientesFechaSigPago(String buscar) throws ParseException{
+        ArrayList<Cliente> c = conexion.getClientes();
+        ArrayList<Cliente> nueva = new ArrayList<>();
+        for (Cliente cliente : c){
+            if(validaciones.generarFechaProxPago(cliente.getFechaPago()).equalsIgnoreCase(buscar)){
+                nueva.add(cliente);
+            }
+        }
+        return nueva;
+    }
+    
     private void btnTablaOriginalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTablaOriginalActionPerformed
         // TODO add your handling code here:
         this.tipoCliente.setVisible(true);
