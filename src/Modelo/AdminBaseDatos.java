@@ -1,7 +1,10 @@
 package Modelo;
 
 import java.sql.*;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by Sergio on 8/4/2017.
@@ -21,12 +24,14 @@ public class AdminBaseDatos {
     private Statement stmt;
     private PreparedStatement prepStmt;
     private ResultSet resultado;
+    private Validaciones validaciones;
 
     //    Constructor
     public AdminBaseDatos() throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.jdbc.Driver");
         conn = DriverManager.getConnection(DB_URL,USER,PASS);
         System.out.println("Base Datos Conectada!");
+        this.validaciones = new Validaciones();
     }
     
     // Metodo que captura todos los clientes de la base de datos
@@ -72,6 +77,11 @@ public class AdminBaseDatos {
     }
         
     public void agregarCliente(Cliente cliente){
+        try {
+            cliente.setFechaSigPago(validaciones.generarFechaProxPago(cliente.getFechaPago()));
+        } catch (ParseException ex) {
+            Logger.getLogger(AdminBaseDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try{
             prepStmt = conn.prepareStatement("insert into cliente (diasVencimiento, nombreCliente, primerApellido, segundoApellido,"
                     + "cedula, telefono, direccion, email, fechaIngreso, fechaPago, fechaSigPago, morosidades, comentarios, tratoEspecial, eliminado) "
@@ -114,6 +124,11 @@ public class AdminBaseDatos {
             tmpTrato = 1;
         }else{
             tmpTrato =0;
+        }
+        try {
+            cliente.setFechaSigPago(validaciones.generarFechaProxPago(cliente.getFechaPago()));
+        } catch (ParseException ex) {
+            Logger.getLogger(AdminBaseDatos.class.getName()).log(Level.SEVERE, null, ex);
         }
         try{
                 prepStmt = conn.prepareStatement("update cliente set diasVencimiento = ?, nombreCliente = ?, "

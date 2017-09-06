@@ -195,6 +195,7 @@ public class PnlAdminCliente extends javax.swing.JPanel {
     }
     
     public void limpiar(){
+       this.txtIdCliente.setText("");
        this.txtAComentario.setText("");
        this.txtCedula.setText("");
        this.txtDiasRestantes.setText("");

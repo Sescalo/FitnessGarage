@@ -63,7 +63,7 @@ public class ManejadorAdminCliente implements ActionListener {
             Cliente cliente = clienteVacioIncluir();
             if(cliente != null){
                 if(validaciones.validarNombres(cliente.getNombreCliente(), cliente.getPrimerApellido(), cliente.getSegundoApellido()) 
-                        && validaciones.validarFecha(cliente.getFechaIngreso()) && validaciones.validarFecha(cliente.getFechaPago())){
+                        && validaciones.validarFecha(cliente.getFechaPago())){
                     conexion.agregarCliente(cliente);
                     JOptionPane.showMessageDialog(frmAdminCliente, "Cliente agregado correctamente.");
                     frmAdminCliente.getPnlAdminCliente1().limpiar();

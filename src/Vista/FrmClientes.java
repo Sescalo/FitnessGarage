@@ -95,7 +95,14 @@ public class FrmClientes extends javax.swing.JFrame {
                     int indice = tblClientes.getSelectedRow();
                     Cliente cliente = clientes.get(indice);
                     tblClientes.getCellEditor().stopCellEditing();
-
+                    
+                    String fechaProxPago;
+                    try {
+                        fechaProxPago = validaciones.generarFechaProxPago(cliente.getFechaPago());
+                        cliente.setFechaSigPago(fechaProxPago);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(FrmClientes.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtIdCliente(cliente.getIdCliente());
                     try {
                         frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtDiasRestantes(validaciones.calcularDiasRestantes(cliente.getFechaSigPago()));
@@ -112,11 +119,7 @@ public class FrmClientes extends javax.swing.JFrame {
                     frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtEmail(cliente.getEmail());
                     frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtFechaIngreso(cliente.getFechaIngreso());
                     frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtFechaPago(cliente.getFechaPago());
-                    try {
-                        frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtFechaProxPago(validaciones.generarFechaProxPago(cliente.getFechaPago()));
-                    } catch (ParseException ex) {
-                        Logger.getLogger(MyCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtFechaProxPago(cliente.getFechaSigPago());
                     frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtMorosidades(cliente.getMorosidades());
                     frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setTxtAComentario(cliente.getComentarios());
                     frmMenu.getFrmAdminCliente().getPnlAdminCliente1().setChboxTratoEspecial(cliente.isTratoEspecial());
@@ -228,8 +231,10 @@ public class FrmClientes extends javax.swing.JFrame {
            if(!cliente.getMorosidades().equalsIgnoreCase("")){
                ast = "*";
            }
-           int diasRestantes = validaciones.calcularDiasRestantes(cliente.getFechaSigPago());
            String fechaProxPago = validaciones.generarFechaProxPago(cliente.getFechaPago());
+           cliente.setFechaSigPago(fechaProxPago);
+           int diasRestantes = validaciones.calcularDiasRestantes(cliente.getFechaSigPago());
+           
             Object[] tmp={cliente.getIdCliente(),diasRestantes,cliente.getNombreCliente()+ast,cliente.getPrimerApellido(),cliente.getSegundoApellido(),
             cliente.getCedula(),cliente.getTelefono(),cliente.getDireccion(),cliente.getEmail(),cliente.getFechaIngreso(),
             cliente.getFechaPago(),fechaProxPago,cliente.getMorosidades(),cliente.getComentarios(),cliente.isTratoEspecial()};
